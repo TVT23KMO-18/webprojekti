@@ -1,0 +1,79 @@
+.näytöksetcontainer {
+  width: 70%;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 80px;
+}
+.moviediv {
+  display: flex;
+  margin-bottom: 10px;
+  border: 2px solid gray;
+  /* background-color: #f9f9f9;*/
+  background-color: var(--dark-color);
+}
+.row {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+.row p {
+  margin-bottom: 10px;
+  color: var(--light-color);
+}
+.row h3 {
+  margin-top: 10px;
+  color: var(--light-color);
+}
+.kuva {
+  flex: 1; /* Picture on the left takes up one-third of the space */
+}
+.kuva img {
+  margin: 5px;
+  align-self: center;
+}
+
+.title {
+}
+.rating img {
+  height: 30px;
+}
+.time {
+}
+.selectit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  padding: 10px;
+}
+
+.selectit select {
+  height: 30px;
+  width: calc(100% - 20px);
+  margin: 10px;
+  color: var(--light-color);
+  background-color: var(--dark-color);
+}
+
+.selectit option {
+  color: var(--light-color);
+}
+.nappi {
+  flex: 1; /* Button on the right takes up one-third of the space */
+  display: flex;
+  justify-content: flex-end; /* Align button to the right */
+  align-items: center; /* Center button vertically */
+}
+.nappi button {
+  margin-right: 10px; /* Adjust as needed */
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  height: 50px;
+  width: 100px;
+  font-size: larger;
+}
+.virhediv {
+  text-align: center;
+  margin-top: 120px;
+  color: var(--dark-color);
+}

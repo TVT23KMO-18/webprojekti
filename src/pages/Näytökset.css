@@ -8,7 +8,6 @@
   display: flex;
   margin-bottom: 10px;
   border: 2px solid gray;
-  /* background-color: #f9f9f9;*/
   background-color: var(--dark-color);
 }
 .row {
@@ -26,20 +25,18 @@
   color: var(--light-color);
 }
 .kuva {
-  flex: 1; /* Picture on the left takes up one-third of the space */
+  flex: 1;
+  height: 155px;
 }
 .kuva img {
   margin: 5px;
   align-self: center;
 }
 
-.title {
-}
 .rating img {
   height: 30px;
 }
-.time {
-}
+
 .selectit {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -59,13 +56,13 @@
   color: var(--light-color);
 }
 .nappi {
-  flex: 1; /* Button on the right takes up one-third of the space */
+  flex: 1;
   display: flex;
-  justify-content: flex-end; /* Align button to the right */
-  align-items: center; /* Center button vertically */
+  justify-content: flex-end;
+  align-items: center;
 }
 .nappi button {
-  margin-right: 10px; /* Adjust as needed */
+  margin-right: 10px;
   background-color: var(--light-color);
   color: var(--dark-color);
   height: 50px;

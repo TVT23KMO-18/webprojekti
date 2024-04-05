@@ -1,12 +1,12 @@
 const pgPool = require('./pg_connection');
 
 const sql = {
-    REGISTER: 'INSERT INTO users VALUES ($1,$2,$3)',
+    REGISTER: 'INSERT INTO users (username, password) VALUES ($1,$2)',
     GET_PASSWORD: 'SELECT password FROM users WHERE username=$1'
 }
 
-async function register(iduser, username, pwHash) {
-    await pgPool.query(sql.REGISTER, [iduser, username, pwHash]);
+async function register(username, pwHash) {
+    await pgPool.query(sql.REGISTER, [username, pwHash]);
 
 }
 

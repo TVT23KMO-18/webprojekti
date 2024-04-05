@@ -5,13 +5,12 @@ const bcrypt = require('../server/node_modules/bcrypt');
 const jwt = require('../server/node_modules/jsonwebtoken');
 
 router.post('/register', async (req,res) => {
-    const iduser = req.body.iduser;
     const username = req.body.username;
     const password = req.body.password;
 
     const pwHash = await bcrypt.hash(password, 10);
 
-    await register(iduser, username, pwHash);
+    await register(username, pwHash);
 
     res.end();
 

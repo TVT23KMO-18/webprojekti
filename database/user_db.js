@@ -3,7 +3,7 @@ const pgPool = require('./pg_connection');
 const sql = {
     GET_ALL_USERS: 'SELECT username FROM users',
     GET_USERNAME: 'SELECT username FROM users WHERE iduser=$1',
-    ADD_USER: 'INSERT INTO users (iduser,username,password) VALUES ($1,$2,$3)'
+    ADD_USER: 'INSERT INTO users (username,password) VALUES ($1,$2)'
 }
 
 async function getUsers() {
@@ -18,7 +18,7 @@ async function getOneUser(iduser) {
     return result.rows
 }
 
-async function addUser(iduser, username, password) {
+async function addUser(username, password) {
     try {
         await pgPool.query(sql.ADD_USER, [iduser, username, password])
     } catch(err) {

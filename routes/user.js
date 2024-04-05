@@ -14,7 +14,7 @@ router.get('/oneuser', async (req, res) => {
 })
 
 router.post('/adduser', async (req, res) => {
-    await addUser(req.body.iduser, req.body.username, req.body.password);
+    await addUser(req.body.username, req.body.password);
     res.end();
 })
 

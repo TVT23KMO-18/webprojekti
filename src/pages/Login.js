@@ -1,19 +1,18 @@
-import { useNavigate } from 'react-router-dom'
 import './Login.css'
 import React, { useState } from 'react'
 import { useUser } from '../context/useUser'
 
 export default function Login() {
-    const { setUser } = useUser()
+    const { login } = useUser()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const navigate = useNavigate()
 
     const validate = (e) => {
         e.preventDefault()
-        if (username === 'admin' && password === 'admin') {
-            setUser({user: username,password: password})
-            navigate("/")
+
+        if (username.length > 0 && password.length > 0) {
+            const data = {"username": username, "password": password}
+            login(data)
         }
     }
 

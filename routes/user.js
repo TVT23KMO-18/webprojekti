@@ -1,4 +1,4 @@
-const { getUsers, getOneUser, addUser } = require('../database/user_db')
+const { getUsers, getOneUser, addUser, deleteUser } = require('../database/user_db')
 
 const router = require('../server/node_modules/express').Router()
 
@@ -15,6 +15,11 @@ router.get('/oneuser', async (req, res) => {
 
 router.post('/adduser', async (req, res) => {
     await addUser(req.body.username, req.body.password);
+    res.end();
+})
+
+router.post('/deleteuser', async (req, res) => {
+    await deleteUser(req.body.username);
     res.end();
 })
 

@@ -31,19 +31,23 @@ CREATE TABLE "reviews" (
 ALTER TABLE favourites
 ADD CONSTRAINT fk_favourites_iduser
 FOREIGN KEY (iduser)
-REFERENCES users(iduser);
+REFERENCES users(iduser)
+ON DELETE CASCADE;
 
 ALTER TABLE group_membership
 ADD CONSTRAINT fk_group_membership_iduser
 FOREIGN KEY (iduser)
-REFERENCES users(iduser);
+REFERENCES users(iduser)
+ON DELETE CASCADE;
 
 ALTER TABLE group_membership
 ADD CONSTRAINT fk_group_membership_idgroup
 FOREIGN KEY (idgroup)
-REFERENCES "group"(idgroup);
+REFERENCES "group"(idgroup)
+ON DELETE CASCADE;
 
 ALTER TABLE reviews
 ADD CONSTRAINT fk_reviews_iduser
 FOREIGN KEY (iduser)
-REFERENCES users(iduser);
+REFERENCES users(iduser)
+ON DELETE CASCADE;

@@ -51,3 +51,6 @@ ADD CONSTRAINT fk_reviews_iduser
 FOREIGN KEY (iduser)
 REFERENCES users(iduser)
 ON DELETE CASCADE;
+
+ALTER TABLE reviews
+ADD COLUMN serieid INT;

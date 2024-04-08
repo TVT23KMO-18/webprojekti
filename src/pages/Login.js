@@ -1,6 +1,7 @@
 import './Login.css'
 import React, { useState } from 'react'
 import { useUser } from '../context/useUser'
+import { Link } from 'react-router-dom'
 
 export default function Login() {
     const { login } = useUser()
@@ -31,6 +32,9 @@ export default function Login() {
             </div>
             <button>Kirjaudu</button>
         </form>
+        <div id="register">
+           <p> <Link to="/Register">Luo käyttäjätunnus</Link> </p>
+        </div> 
     </div>
   )
 }

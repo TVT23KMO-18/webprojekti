@@ -104,8 +104,7 @@ export default function Arvostelut() {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2M2ZGNmYTIwZGVlMTZhMGEyOGRlZjhmY2UzNmE4YSIsInN1YiI6IjY1ZjdlOWM0NTkwN2RlMDE3Y2U4NWZlMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.UVbu2GhSp7uexirB2K9egvxgNDFpQmYOZ1umFXTnZgA",
+        Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
       },
     };
     try {

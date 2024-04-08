@@ -28,7 +28,8 @@ async function addUser(username, password) {
 
 async function deleteUser(username) {
     try {  
-        const iduser = (await pgPool.query('SELECT iduser FROM users WHERE username=$1', [username])).rows[0].iduser
+        const result = await pgPool.query('SELECT iduser FROM users WHERE username=$1', [username]);
+        const iduser = result.rows[0].iduser;
         await pgPool.query('DELETE FROM favourites WHERE iduser=$1', [iduser])
         await pgPool.query('DELETE FROM group_membership WHERE iduser=$1', [iduser])
         await pgPool.query('DELETE FROM reviews WHERE iduser=$1', [iduser])

@@ -19,7 +19,7 @@ router.post('/adduser', async (req, res) => {
 })
 
 router.post('/deleteuser', async (req, res) => {
-    await deleteUser(req.body.username);
+    await deleteUser(req.query.username);
     res.end();
 })
 

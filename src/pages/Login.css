@@ -1,13 +1,28 @@
-div#login-form {
+#login-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column; 
+    align-items: center; 
+    
 }
 
-div#login-form div {
+#login-form {
+    margin-bottom: 50px;
+}
+
+#login-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#login-form div {
     margin: var(--gutter) 0;
 }
 
-div#login-form label {
+#login-form label {
     display: inline-block;
     width: 100px;
+}
+#register {
+    margin: 50px;
 }

@@ -19,11 +19,12 @@ export default function Login() {
 
 
   return (
+<div id="login-container">
     <div id="login-form">
         <form onSubmit={validate}>
             <h3>Kirjaudu</h3>
             <div>
-                <label>Käyttäjä</label>
+                <label>Käyttäjänimi</label>
                 <input value={username} onChange={e => setUsername(e.target.value)}/>
             </div>
             <div>
@@ -36,5 +37,6 @@ export default function Login() {
            <p> <Link to="/Register">Luo käyttäjätunnus</Link> </p>
         </div> 
     </div>
+</div>
   )
 }

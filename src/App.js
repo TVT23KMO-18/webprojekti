@@ -11,6 +11,7 @@ import Suosikit from './pages/Suosikit';
 import Ryhmät from './pages/Ryhmät';
 import Arvostelut from './pages/Arvostelut';
 import Näytökset from './pages/Näytökset';
+import Register from './pages/Register';
 import Haku from './pages/Haku';
 import UserProvider from './context/UserProvider';
 import PrivateRoute from './pages/PrivateRoute';
@@ -34,6 +35,7 @@ function App() {
         <Route path="/arvostelut" exact element={<Arvostelut />} />
         <Route path="/näytökset" exact element={<Näytökset />} />
         <Route path="/haku" exact element={<Haku />} />
+        <Route path="/register" exact element={<Register />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
 

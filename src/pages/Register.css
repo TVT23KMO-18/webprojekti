@@ -1,13 +1,17 @@
-div#login-form {
+div#register-form {
     display: flex;
     justify-content: center;
 }
 
-div#login-form div {
+div#register-form div {
     margin: var(--gutter) 0;
 }
 
-div#login-form label {
+div#register-form label {
     display: inline-block;
     width: 100px;
+}
+
+div#register-form button {
+    width: 50px;
 }

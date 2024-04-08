@@ -17,7 +17,7 @@ export default function Register_user() {
         try {
             const response = await axios.post('http://localhost:3001/auth/register', json, options)
             console.log(response);
-            alert("Käyttäjä luotiin");
+            alert("Käyttäjä luotiin. Voit nyt kirjautua sisään tunnuksellasi.");
         } catch (error) {
             console.error(error);
             alert("Virhe käyttäjän luonnissa");

@@ -8,11 +8,14 @@ router.post('/register', async (req,res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    const pwHash = await bcrypt.hash(password, 10);
-
-    await register(username, pwHash);
-
-    res.end();
+    try {
+        const pwHash = await bcrypt.hash(password, 10)
+        await register(username, pwHash)
+        res.json({ success: true, message: "Käyttäjä rekisteröity onnistuneesti." })
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ success: false, message: "Virhe käyttäjän rekisteröinnissä" })
+    }
 
 });
 

@@ -32,12 +32,12 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/ryhmät" element={<Ryhmät />} />
           <Route path="/suosikit" element={<Suosikit />} />
+          <Route path="/omasivu" exact element={<OmaSivu />} />
         </Route>
         <Route path="/arvostelut" exact element={<Arvostelut />} />
         <Route path="/näytökset" exact element={<Näytökset />} />
         <Route path="/haku" exact element={<Haku />} />
         <Route path="/register" exact element={<Register />} />
-        <Route path="/omasivu" exact element={<OmaSivu />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
 

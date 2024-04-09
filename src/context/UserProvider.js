@@ -25,7 +25,7 @@ export default function UserProvider({children}) {
         navigate("/")
       })
       .catch(error => {
-        throw error
+        alert('Käyttäjätunnus tai salasana väärä')
       })
   }
 

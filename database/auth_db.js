@@ -5,9 +5,19 @@ const sql = {
     GET_PASSWORD: 'SELECT password FROM users WHERE username=$1'
 }
 
-async function register(username, pwHash) {
-    await pgPool.query(sql.REGISTER, [username, pwHash]);
 
+async function register(username, pwHash) {
+    try {
+        await pgPool.query(sql.REGISTER, [username, pwHash]);
+    } catch (err) {
+        if (err.code === '23505' && err.constraint === 'users_username_key') {
+            console.log("Duplicate username error:", err.message);
+            throw new Error('Username already exists');
+        } else {
+            console.error("Other error:", err.message);
+            throw new Error(err.message);
+        }
+    }
 }
 
 async function getPassword(username) {

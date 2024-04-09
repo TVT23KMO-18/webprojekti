@@ -15,12 +15,16 @@ export default function Register_user() {
         }
 
         try {
-            const response = await axios.post('http://localhost:3001/auth/register', json, options)
+            const response = await axios.post('http://localhost:3001/auth/register', json, options);
             console.log(response);
             alert("Käyttäjä luotiin. Voit nyt kirjautua sisään tunnuksellasi.");
         } catch (error) {
-            console.error(error);
-            alert("Virhe käyttäjän luonnissa");
+            if (error.response && error.response.data && error.response.data.message) {
+                alert(error.response.data.message);
+            } else {
+                console.error(error);
+                alert("Virhe käyttäjän rekisteröinnissä");
+            }
         }
     }
 

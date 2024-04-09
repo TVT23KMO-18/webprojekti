@@ -13,8 +13,13 @@ router.post('/register', async (req,res) => {
         await register(username, pwHash)
         res.json({ success: true, message: "Käyttäjä rekisteröity onnistuneesti." })
     } catch (error) {
-        console.error(error)
-        res.status(500).json({ success: false, message: "Virhe käyttäjän rekisteröinnissä" })
+        if (error.message === 'Username already exists') {
+            console.log(error.message);
+            res.status(400).json({ success: false, message: "Käyttäjänimi on varattu." });
+        } else {
+            console.error(error)
+            res.status(500).json({ success: false, message: "Virhe käyttäjän rekisteröinnissä" });
+        }
     }
 
 });

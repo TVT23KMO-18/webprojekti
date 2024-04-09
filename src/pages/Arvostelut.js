@@ -33,8 +33,6 @@ export default function Arvostelut() {
             movieImage = movieData.movieImage;
             type = "Sarja";
           }
-          //const { title, movieImage } = await movieNamePictureFromId(movieId);
-          //console.log(movieId);
 
           ArvostelutData.push({
             idUser,
@@ -62,9 +60,9 @@ export default function Arvostelut() {
         throw new Error("Network response was not ok");
       }
       const dataArray = await response.json();
-      // Extract the username object from the array
+
       const userData = dataArray[0];
-      // Extract the username from the user data object
+
       const username = userData.username;
 
       return username;
@@ -75,12 +73,11 @@ export default function Arvostelut() {
   }
 
   async function movieNamePictureFromId(movieId) {
-    const url = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
+    const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`;
     const options = {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
       },
     };
     try {
@@ -99,13 +96,11 @@ export default function Arvostelut() {
     }
   }
   async function serieNamePictureFromId(serieId) {
-    const url = `https://api.themoviedb.org/3/tv/${serieId}?language=en-US`;
+    const url = `https://api.themoviedb.org/3/tv/${serieId}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`;
     const options = {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2M2ZGNmYTIwZGVlMTZhMGEyOGRlZjhmY2UzNmE4YSIsInN1YiI6IjY1ZjdlOWM0NTkwN2RlMDE3Y2U4NWZlMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.UVbu2GhSp7uexirB2K9egvxgNDFpQmYOZ1umFXTnZgA",
       },
     };
     try {

@@ -2,12 +2,12 @@ const pgPool = require("./pg_connection");
 
 const sql = {
   ADD_REVIEW:
-    "INSERT INTO reviews (idreviews, iduser, review_text, review_num, movieid) VALUES ($1,$2,$3,$4,$5)",
+    "INSERT INTO reviews (iduser, review_text, review_num, movieid, serieid) VALUES ($1,$2,$3,$4,$5)",
   GET_ALL_REVIEWS: "SELECT * FROM reviews",
 };
 
-async function addReview(idreview, iduser, review, num, movieid) {
-  await pgPool.query(sql.ADD_REVIEW, [idreview, iduser, review, num, movieid]);
+async function addReview(iduser, review, num, movieid, serieid) {
+  await pgPool.query(sql.ADD_REVIEW, [iduser, review, num, movieid, serieid]);
 }
 
 async function getReviews() {

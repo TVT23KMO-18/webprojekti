@@ -10,11 +10,11 @@ router.get("/", async (req, res) => {
 
 router.post("/", auth, async (req, res) => {
   await addReview(
-    req.body.idreviews,
     req.body.iduser,
     req.body.review_text,
     req.body.review_num,
-    req.body.movieid
+    req.body.movieid,
+    req.body.serieid
   );
   res.end();
 });

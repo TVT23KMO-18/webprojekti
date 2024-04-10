@@ -35,3 +35,5 @@ app.get('/', (req, res) => {
     console.log("Getting root info")
     res.send('Welcome to the root')
 })
+
+module.exports = app;

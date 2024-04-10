@@ -1,9 +1,10 @@
-const { auth } = require('../middleware/authorization');
+const { getGroups } = require('../database/group_db')
 
 const router = require('../server/node_modules/express').Router()
 
-router.get('/', auth ,async (req, res) => {
-    
+router.get("/groups", async (req, res) => {
+    const username = await getGroups(req.query.username)
+    res.json(username)
 })
 
 

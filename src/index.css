@@ -16,3 +16,11 @@
 *,*::before,*::after {
   box-sizing: border-box;
 }
+
+@media only screen and (max-width: 800px) {
+  :root {
+    --gutter: 0.5em; 
+  }
+  
+  /* Additional mobile-specific styles can be added here */
+}

@@ -10,7 +10,6 @@
   margin-bottom: 10px;
   border: 2px solid gray;
   background-color: var(--dark-color);
-  height: 215px;
 }
 
 .row {
@@ -29,9 +28,66 @@
 }
 .kuva {
   flex: 1;
+  position: relative; 
 }
 .kuva img {
   margin: 5px;
   align-self: center;
-  height: 200px;
+  max-width: 100%;
+  height: auto;
+  max-height: calc(100% - 10px);
+}
+
+@media only screen and (max-width: 800px) {
+
+  .arvostelutcontainer {
+    width: 90%;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .arvostelut {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    border: 2px solid gray;
+    background-color: var(--dark-color);
+    overflow: hidden;
+  }
+  
+  .row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  
+  .row p {
+    margin-bottom: 5px;
+    color: var(--light-color);
+    overflow: auto;
+    text-overflow: initial;
+    white-space: normal;
+  }
+  
+  .row h3 {
+    margin-top: 5px;
+    color: var(--light-color);
+    overflow: auto;
+    text-overflow: initial;
+    white-space: normal;
+  }
+  
+  .kuva {
+    flex: 1;
+  }
+  
+  .kuva img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    max-height: calc(100% - 10px);
+  }
 }

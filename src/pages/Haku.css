@@ -1,5 +1,9 @@
- img {
-    height: 300px;
-    width: 200px;
-    margin: 10px;
-} 
+img {
+  height: 300px;
+  width: 200px;
+  margin: 10px;
+}
+
+img:hover {
+  cursor: pointer;
+}

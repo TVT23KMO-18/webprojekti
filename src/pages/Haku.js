@@ -89,7 +89,7 @@ export default function Haku() {
   };
 
   return (
-    <div>
+    <div id='haku-container'>
       <div>
         <input value={searchQuery} onChange={handleInputChange} placeholder="Search for a movie"/>
         <select value={genre} onChange={handleGenreChange}>

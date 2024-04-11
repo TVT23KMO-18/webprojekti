@@ -1,6 +1,6 @@
 .popupcontainer {
   position: fixed;
-  top: 50%;
+  top: 55%;
   left: 50%;
   width: 80%;
   height: 500px;
@@ -17,6 +17,10 @@
 }
 
 .popupcontainer button {
+  width: 50%;
+  margin-bottom: 10px;
+}
+.linkkinappi .napit button {
   width: 50%;
   margin-bottom: 10px;
 }

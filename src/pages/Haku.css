@@ -33,3 +33,8 @@ img {
   width: 200px;
   margin: 10px;
 }
+
+.link-button {
+  width: 50%;
+  margin-bottom: 10px;
+}

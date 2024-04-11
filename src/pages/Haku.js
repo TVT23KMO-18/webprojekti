@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Haku.css";
 import Popup from "./Popup";
+import { Link } from "react-router-dom";
 
 export default function Haku() {
   const [media, setMedia] = useState([]);
@@ -16,6 +17,7 @@ export default function Haku() {
   const [triggerState, setTrigger] = useState(false);
   const [PopupPosterPath, setPopupPosterPath] = useState("");
   const [movieId, setMovieId] = useState("");
+  const [name, setName] = useState("");
 
   const getMedia = async () => {
     try {
@@ -147,6 +149,7 @@ export default function Haku() {
                 setPopupPosterPath(item.poster_path);
                 setTrigger(true);
                 setMovieId(item.id);
+                setName(item.title);
               }}
               src={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
               alt={item.title || item.name}
@@ -158,6 +161,7 @@ export default function Haku() {
         trigger={triggerState}
         posterPath={PopupPosterPath}
         movieId={movieId}
+        mediaType={mediaType}
       >
         <img
           src={`https://image.tmdb.org/t/p/w200${PopupPosterPath}`}
@@ -165,7 +169,14 @@ export default function Haku() {
         />
         <div className="napit"></div>
         <button>Lisää suosikkeihin</button>
-        <button>Arvostele</button>
+        <div className="linkkinappi">
+          <Link
+            to={`/uusiarvostelu/${mediaType}/${movieId}/${name}`}
+            className="nav-link"
+          >
+            <button>Arvostele</button>
+          </Link>
+        </div>
         <button
           onClick={() => {
             setTrigger(false);
@@ -176,6 +187,7 @@ export default function Haku() {
         </button>
 
         <p>id:{movieId}</p>
+        <p>{mediaType}</p>
       </Popup>
     </div>
   );

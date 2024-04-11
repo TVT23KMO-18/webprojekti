@@ -10,7 +10,7 @@ export default function UusiArvostelu() {
   const [rating, setRating] = useState("");
   const [text, setText] = useState("");
   const { userid, token } = useContext(UserContext);
-  console.log(mediaType);
+
   const handleChange = (e) => {
     setRating(e.target.value);
   };
@@ -47,7 +47,7 @@ export default function UusiArvostelu() {
           },
         }
       );
-      console.log(response.data);
+      console.log("Arvostelu lisätty", response.data);
     } catch (error) {
       console.error(error);
     }

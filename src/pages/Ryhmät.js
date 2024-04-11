@@ -7,6 +7,7 @@ export default function Ryhmät() {
 
   const { user } = useContext(UserContext);
   const [groups, setGroups] = useState([]);
+  const [groupName, setGroupName] = useState('');
 
   useEffect(() => {
     const fetchGroups = async () => {
@@ -21,6 +22,35 @@ export default function Ryhmät() {
 
     fetchGroups();
   }, [user.username]);
+
+  const handleInputChange = (e) => {
+    setGroupName(e.target.value);
+  }
+
+  const ryhmä = async (e) => {
+    e.preventDefault();
+    console.log(groupName)
+    console.log(user.username)
+
+    const data = {
+      username: user.username,
+      groupname: groupName
+    }
+
+    const jsonData = JSON.stringify(data)
+    
+    const options = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    try {
+      await axios.post('http://localhost:3001/group', jsonData, options);
+
+    } catch(error) {
+      console.log("Error creating group:", error);
+    }
+  }
 
   return (
     <div className='ryhmatcontainer'>
@@ -49,8 +79,8 @@ export default function Ryhmät() {
             <div className='ryhmanimi-input'>
               <p>Ryhmän nimi:</p>
               <div>
-                <input></input>
-                <button>Luo ryhmä</button>
+                <input value={groupName} onChange={handleInputChange}></input>
+                <button onClick={ryhmä}>Luo ryhmä</button>
               </div>
             </div>
         </div>
@@ -68,5 +98,5 @@ export default function Ryhmät() {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -141,19 +141,22 @@ export default function Haku() {
         </button>
       </div>
       {error && <div>{error}</div>}
+
       <div className="elokuvaKansi">
-        {media.map((item) => (
-          <div key={item.id}>
-            <img
-              onClick={() => {
-                setPopupPosterPath(item.poster_path);
-                setTrigger(true);
-                setMovieId(item.id);
-                setName(item.title);
-              }}
-              src={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
-              alt={item.title || item.name}
-            />
+        {media.map((item, index) => (
+          <div key={`${item.id}-${index}`}>
+            {item.poster_path && (
+              <img
+                onClick={() => {
+                  setPopupPosterPath(item.poster_path);
+                  setTrigger(true);
+                  setMovieId(item.id);
+                  setName(item.title);
+                }}
+                src={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
+                alt={item.title || item.name}
+              />
+            )}
           </div>
         ))}
       </div>

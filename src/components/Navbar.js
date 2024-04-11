@@ -1,13 +1,24 @@
-import { Link } from 'react-router-dom'
-import './Navbar.css'
-import React from 'react'
-import { useUser } from '../context/useUser'
-export default function Navbar({}) {
-    const { user } = useUser()
-  return (
-    <nav>
-        <div>
-            <ul>
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import './Navbar.css';
+import { useUser } from '../context/useUser';
+
+export default function Navbar() {
+    const { user } = useUser();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
+    return (
+        <nav>
+            <div className="hamburger" onClick={toggleMenu}>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <ul className={`menu ${isMenuOpen ? 'active' : ''}`}>
                 <li>
                     <Link to="/">Etusivu</Link>
                 </li>
@@ -30,19 +41,17 @@ export default function Navbar({}) {
                     <Link to="/omasivu">Oma Sivu</Link>
                 </li>
             </ul>
-        </div>
-        <div>
-            <ul>
+            <div id='logindiv'>
+                <ul>
                 <li>
-                    {user === null &&
-                     <Link to="/login">Kirjaudu</Link>
-                    }
-                    {user &&
-                     <Link to="/logout">Kirjaudu ulos</Link>
-                    }
+                    {user === null ? (
+                        <Link to="/login">Kirjaudu</Link>
+                    ) : (
+                        <Link to="/logout">Kirjaudu ulos</Link>
+                    )}
                 </li>
-            </ul>
-        </div>
-    </nav>
-  )
+                </ul>
+            </div>
+        </nav>
+    );
 }

@@ -1,0 +1,26 @@
+.popupcontainer {
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  width: 80%;
+  height: 500px;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.popupcontainer img {
+  margin-bottom: 10px;
+}
+
+.popupcontainer button {
+  width: 50%;
+  margin-bottom: 10px;
+}
+.linkkinappi .napit button {
+  width: 50%;
+  margin-bottom: 10px;
+}

@@ -1,46 +1,53 @@
-require('../server/node_modules/dotenv').config();
-const router = require('../server/node_modules/express').Router();
-const { register, getPassword } = require('../database/auth_db');
-const bcrypt = require('../server/node_modules/bcrypt');
-const jwt = require('../server/node_modules/jsonwebtoken');
+require("../server/node_modules/dotenv").config();
+const router = require("../server/node_modules/express").Router();
+const { register, getPassword, getUserID } = require("../database/auth_db");
+const bcrypt = require("../server/node_modules/bcrypt");
+const jwt = require("../server/node_modules/jsonwebtoken");
 
-router.post('/register', async (req,res) => {
-    const username = req.body.username;
-    const password = req.body.password;
+router.post("/register", async (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
 
-    try {
-        const pwHash = await bcrypt.hash(password, 10)
-        await register(username, pwHash)
-        res.json({ success: true, message: "Käyttäjä rekisteröity onnistuneesti." })
-    } catch (error) {
-        if (error.message === 'Username already exists') {
-            console.log(error.message);
-            res.status(400).json({ success: false, message: "Käyttäjänimi on varattu." });
-        } else {
-            console.error(error)
-            res.status(500).json({ success: false, message: "Virhe käyttäjän rekisteröinnissä" });
-        }
+  try {
+    const pwHash = await bcrypt.hash(password, 10);
+    await register(username, pwHash);
+    res.json({
+      success: true,
+      message: "Käyttäjä rekisteröity onnistuneesti.",
+    });
+  } catch (error) {
+    if (error.message === "Username already exists") {
+      console.log(error.message);
+      res
+        .status(400)
+        .json({ success: false, message: "Käyttäjänimi on varattu." });
+    } else {
+      console.error(error);
+      res
+        .status(500)
+        .json({ success: false, message: "Virhe käyttäjän rekisteröinnissä" });
     }
-
+  }
 });
 
-router.post('/login', async (req,res) => {
-    const username = req.body.username;
-    const password = req.body.password;
+router.post("/login", async (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
 
-    const db_pass = await getPassword(username);
-
-    if(db_pass) {
-        const isAuth = await bcrypt.compare(password, db_pass);
-        if(isAuth) {
-            const token = jwt.sign({username: username}, process.env.JWT_SECRET);
-            res.status(200).json({jwtToken: token});
-        } else {
-            res.status(401).json({error: 'Wrong password'})
-        }
+  const db_pass = await getPassword(username);
+  const userid = await getUserID(username);
+  if (db_pass) {
+    const isAuth = await bcrypt.compare(password, db_pass);
+    if (isAuth) {
+      const token = jwt.sign({ username: username }, process.env.JWT_SECRET);
+      console.log(userid);
+      res.status(200).json({ jwtToken: token, userid: userid });
     } else {
-        res.status(404).json({error: 'User not found'});
+      res.status(401).json({ error: "Wrong password" });
     }
-})
+  } else {
+    res.status(404).json({ error: "User not found" });
+  }
+});
 
 module.exports = router;

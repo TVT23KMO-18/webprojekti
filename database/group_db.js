@@ -11,4 +11,14 @@ async function getGroups(username) {
     return result.rows
 }
 
-module.exports = { getGroups }
+async function createGroup(username, groupname) {
+    let user = await pgPool.query('SELECT iduser FROM users WHERE username=$1', [username]);
+    let idUser = user.rows[0].iduser;
+    await pgPool.query('INSERT INTO "group" (groupname) VALUES ($1)', [groupname]);
+    let result = await pgPool.query('SELECT idgroup FROM "group" WHERE groupname=$1', [groupname]);
+    let idGroup = result.rows[0].idgroup;
+    await pgPool.query('INSERT INTO "group_membership" (iduser, idgroup) VALUES($1,$2)', [idUser, idGroup])
+}
+
+
+module.exports = { getGroups, createGroup }

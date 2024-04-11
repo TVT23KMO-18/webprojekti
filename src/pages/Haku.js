@@ -123,10 +123,12 @@ export default function Haku() {
       </div>
       {error && <div>{error}</div>}
       <div className='elokuvaKansi'>
-        {media.map((item) => (
-        <div key={item.id}>
+      {media.map((item, index) => (
+        <div key={`${item.id}-${index}`}>
+          {item.poster_path && (
           <img src={`https://image.tmdb.org/t/p/w200${item.poster_path}`} alt={item.title || item.name} />
-        </div>
+           )}
+  </div>
         ))}
       </div>
     </div>

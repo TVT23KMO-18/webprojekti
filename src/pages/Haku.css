@@ -7,3 +7,29 @@ img {
 img:hover {
   cursor: pointer;
 }
+
+.painike {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px;
+  gap: 5px;
+}
+
+.elokuvaKansi {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+img {
+  height: 300px;
+  width: 200px;
+  margin: 10px;
+}
+
+#login-container img {
+  height: 300px;
+  width: 200px;
+  margin: 10px;
+}

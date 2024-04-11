@@ -13,6 +13,7 @@ import Arvostelut from './pages/Arvostelut';
 import Näytökset from './pages/Näytökset';
 import Register from './pages/Register';
 import Haku from './pages/Haku';
+import OmaSivu from './pages/OmaSivu';
 import UserProvider from './context/UserProvider';
 import PrivateRoute from './pages/PrivateRoute';
 
@@ -31,6 +32,7 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/ryhmät" element={<Ryhmät />} />
           <Route path="/suosikit" element={<Suosikit />} />
+          <Route path="/omasivu" exact element={<OmaSivu />} />
         </Route>
         <Route path="/arvostelut" exact element={<Arvostelut />} />
         <Route path="/näytökset" exact element={<Näytökset />} />

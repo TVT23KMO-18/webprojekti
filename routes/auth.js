@@ -8,11 +8,19 @@ router.post('/register', async (req,res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    const pwHash = await bcrypt.hash(password, 10);
-
-    await register(username, pwHash);
-
-    res.end();
+    try {
+        const pwHash = await bcrypt.hash(password, 10)
+        await register(username, pwHash)
+        res.json({ success: true, message: "Käyttäjä rekisteröity onnistuneesti." })
+    } catch (error) {
+        if (error.message === 'Username already exists') {
+            console.log(error.message);
+            res.status(400).json({ success: false, message: "Käyttäjänimi on varattu." });
+        } else {
+            console.error(error)
+            res.status(500).json({ success: false, message: "Virhe käyttäjän rekisteröinnissä" });
+        }
+    }
 
 });
 

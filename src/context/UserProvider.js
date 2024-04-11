@@ -25,12 +25,21 @@ export default function UserProvider({children}) {
         navigate("/")
       })
       .catch(error => {
-        throw error
+        alert('Käyttäjätunnus tai salasana väärä')
       })
   }
 
+  const remove = async(username) => {
+
+    axios.post(`http://localhost:3001/user/deleteuser?username=${username}`)
+    setUser(null)
+    alert('Käyttäjä poistettu.')
+    navigate("/")
+
+  }
+ 
   return (
-    <UserContext.Provider value ={{user,setUser,login}}> 
+    <UserContext.Provider value ={{user,setUser,login,remove}}> 
     { children }
     </UserContext.Provider>
   )

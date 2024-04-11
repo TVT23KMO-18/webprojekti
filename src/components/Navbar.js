@@ -26,6 +26,9 @@ export default function Navbar({}) {
                 <li>
                     <Link to="/haku">Haku</Link>
                 </li>
+                <li>
+                    <Link to="/omasivu">Oma Sivu</Link>
+                </li>
             </ul>
         </div>
         <div>

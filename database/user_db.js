@@ -27,16 +27,35 @@ async function addUser(username, password) {
 }
 
 async function deleteUser(username) {
-    try {  
+    try {
         const result = await pgPool.query('SELECT iduser FROM users WHERE username=$1', [username]);
-        const iduser = result.rows[0].iduser;
-        await pgPool.query('DELETE FROM favourites WHERE iduser=$1', [iduser])
-        await pgPool.query('DELETE FROM group_membership WHERE iduser=$1', [iduser])
-        await pgPool.query('DELETE FROM reviews WHERE iduser=$1', [iduser])
-        await pgPool.query('DELETE FROM users WHERE iduser=$1', [iduser])
+        const idUser = result.rows[0].iduser;
+        await pgPool.query('DELETE FROM favourites WHERE iduser=$1', [idUser]);
+        const groupMembershipResult = await pgPool.query('SELECT idgroup FROM group_membership WHERE iduser=$1', [idUser]);
+        const idGroups = groupMembershipResult.rows.map(row => row.idgroup);
+        await pgPool.query('DELETE FROM group_membership WHERE iduser=$1', [idUser]);
+        for (const idGroup of idGroups) {
+            await pgPool.query('DELETE FROM "group" WHERE idgroup=$1', [idGroup]);
+        }
+        await pgPool.query('DELETE FROM reviews WHERE iduser=$1', [idUser]);
+        await pgPool.query('DELETE FROM users WHERE iduser=$1', [idUser]);      
+    } catch(err) {
+        console.log(err.message);
+    }
+
+    /*try {  
+        const result = await pgPool.query('SELECT iduser FROM users WHERE username=$1', [username]);
+        const idUser = result.rows[0].iduser;
+        await pgPool.query('DELETE FROM favourites WHERE iduser=$1', [idUser])
+        let result2 = await pgPool.query('SELECT idgroup FROM group_membership WHERE iduser=$1', [idUser])
+        let idGroup = result2.rows[0].idgroup
+        await pgPool.query('DELETE FROM group_membership WHERE iduser=$1', [idUser])
+        await pgPool.query('DELETE FROM "group" WHERE idgroup=$1', [idGroup])
+        await pgPool.query('DELETE FROM reviews WHERE iduser=$1', [idUser])
+        await pgPool.query('DELETE FROM users WHERE iduser=$1', [idUser])
     } catch(err) {
         console.log(err.message)
-    }
+    }*/
 }
 
 module.exports = {getUsers, getOneUser, addUser, deleteUser}

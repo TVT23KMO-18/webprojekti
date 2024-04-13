@@ -63,7 +63,7 @@ export default function UusiArvostelu() {
         <label>Select Rating:</label>
         <select value={rating} onChange={handleChange}>
           <option value="">Select</option>
-          {[...Array(10).keys()].map((num) => (
+          {[...Array(5).keys()].map((num) => (
             <option key={num + 1} value={num + 1}>
               {num + 1}
             </option>

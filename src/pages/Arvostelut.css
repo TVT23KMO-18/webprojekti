@@ -28,7 +28,7 @@
 }
 .kuva {
   flex: 1;
-  position: relative; 
+  position: relative;
 }
 .kuva img {
   margin: 5px;
@@ -37,16 +37,20 @@
   height: auto;
   max-height: calc(100% - 10px);
 }
+.Otsikko h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 
 @media only screen and (max-width: 800px) {
-
   .arvostelutcontainer {
     width: 90%;
     margin: auto;
     margin-top: 20px;
     margin-bottom: 40px;
   }
-  
+
   .arvostelut {
     display: flex;
     flex-direction: column;
@@ -55,14 +59,14 @@
     background-color: var(--dark-color);
     overflow: hidden;
   }
-  
+
   .row {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
     padding: 10px;
   }
-  
+
   .row p {
     margin-bottom: 5px;
     color: var(--light-color);
@@ -70,7 +74,7 @@
     text-overflow: initial;
     white-space: normal;
   }
-  
+
   .row h3 {
     margin-top: 5px;
     color: var(--light-color);
@@ -78,11 +82,11 @@
     text-overflow: initial;
     white-space: normal;
   }
-  
+
   .kuva {
     flex: 1;
   }
-  
+
   .kuva img {
     max-width: 100%;
     height: auto;

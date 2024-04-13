@@ -41,10 +41,11 @@ describe('/GET users', ()=>{
 describe('/Register a user', () => {
     it('Should be able to register a user', async function () {
         try {
+            user = makeid(5);
             const res = await chai.request(server)
                 .post('/auth/register')
                 .set('content-type', 'application/x-www-form-urlencoded')
-                .send({ username: makeid(5), password: 'testi' });
+                .send({ username: user, password: 'testi' });
 
             console.log(res.body);
             chai.expect(res).to.have.status(200);
@@ -56,4 +57,35 @@ describe('/Register a user', () => {
             throw new Error(err);
         }
     });
+
+    it('Should be able to login a user', async function () {
+        try {
+            const res = await chai.request(server)
+                .post('/auth/login')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send({ username: user, password: 'testi' });
+
+            console.log(res.body);
+            chai.expect(res).to.have.status(200);
+            chai.expect(res.body).to.be.an('object');
+            chai.expect(res.body).to.have.property('jwtToken');
+
+        } catch (err) {
+            throw new Error(err);
+        }
+    });
+
+    it('Should be able to delete a user', async function () {
+        try {
+            const res = await chai.request(server)
+                .post('/user/deleteuser')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .query({ username: user });
+
+            chai.expect(res).to.have.status(200);
+
+        } catch (err) {
+            throw new Error(err);
+        }
+    }); 
 });

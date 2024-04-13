@@ -160,12 +160,12 @@ export default function Arvostelut() {
             </div>
           ) : null}
           <div className="row">
-            <h3>{arvostelu.name}</h3>
-            <p>{arvostelu.title}</p>
-            <p>{arvostelu.arvosana}</p>
-            <p>{arvostelu.arvosteluTeksti}</p>
-            <p>{arvostelu.studioName}</p>
             <StarRating rating={arvostelu.arvosana} />
+            <h3 className="elokuvannimi">{arvostelu.title}</h3>
+            <h3 className="arvostelijanimi">{arvostelu.name}</h3>
+            <div className="arvosteluteksti">
+              <p>{arvostelu.arvosteluTeksti}</p>
+            </div>
           </div>
           <div className="nappi">
             <button
@@ -183,9 +183,8 @@ export default function Arvostelut() {
       ))}
       <Popup className="lisätieto" trigger={triggerState}>
         <p>{name}</p>
-        <p>Made by:{studioName}</p>
+        <p>Made by: {studioName}</p>
         <p>{overview}</p>
-
         <button onClick={() => setTrigger(false)}>Sulje</button>
       </Popup>
     </div>

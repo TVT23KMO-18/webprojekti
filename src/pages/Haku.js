@@ -172,14 +172,14 @@ export default function Haku() {
         />
         <div className="napit"></div>
         <button>Lisää suosikkeihin</button>
-        <div className="linkkinappi">
-          <Link
-            to={`/uusiarvostelu/${mediaType}/${movieId}/${name}`}
-            className="nav-link"
-          >
-            <button>Arvostele</button>
-          </Link>
-        </div>
+
+        <Link
+          to={`/uusiarvostelu/${mediaType}/${movieId}/${name}`}
+          className="nav-link"
+        >
+          <button>Arvostele</button>
+        </Link>
+
         <button
           onClick={() => {
             setTrigger(false);

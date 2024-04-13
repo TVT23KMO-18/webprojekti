@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Arvostelut.css";
 import Popup from "./Popup";
-
+import StarRating from "./StarRating";
 export default function Arvostelut() {
   const [arvostelut, setArvostelut] = useState([]);
   const [triggerState, setTrigger] = useState(false);
   const [name, setName] = useState("");
   const [overview, setOverview] = useState("");
-
+  const [studioName, setStudioName] = useState("");
   useEffect(() => {
     async function getRewieves() {
       try {
@@ -26,11 +26,14 @@ export default function Arvostelut() {
           let movieImage = "";
           let type = "";
           let overview = "";
+          let studioName = "";
           if (movieId != null) {
             const movieData = await movieNamePictureFromId(movieId);
             title = movieData.title;
             movieImage = movieData.movieImage;
             overview = movieData.overview;
+            studioName = movieData.studioName;
+            console.log(studioName);
             type = "Elokuva";
           } else {
             const serieId = arvostelu.serieid;
@@ -50,6 +53,7 @@ export default function Arvostelut() {
             title,
             movieImage,
             overview,
+            studioName,
             type,
           });
         }
@@ -97,8 +101,12 @@ export default function Arvostelut() {
       const title = data.title;
       const movieImage = data.poster_path;
       const overview = data.overview;
+      const studioName =
+        data.production_companies.length > 0
+          ? data.production_companies[0].name
+          : null;
 
-      return { title, movieImage, overview };
+      return { title, movieImage, overview, studioName };
     } catch (error) {
       console.error("Fetch error:", error);
       throw error;
@@ -122,13 +130,18 @@ export default function Arvostelut() {
       const title = data.original_name;
       const movieImage = data.poster_path;
       const overview = data.overview;
+      const studioName =
+        data.production_companies.length > 0
+          ? data.production_companies[0].name
+          : null;
 
-      return { title, movieImage, overview };
+      return { title, movieImage, overview, studioName };
     } catch (error) {
       console.error("Fetch error:", error);
       throw error;
     }
   }
+
   return (
     <div className="arvostelutcontainer">
       <div className="Otsikko">
@@ -150,6 +163,8 @@ export default function Arvostelut() {
             <p>{arvostelu.title}</p>
             <p>{arvostelu.arvosana}</p>
             <p>{arvostelu.arvosteluTeksti}</p>
+            <p>{arvostelu.studioName}</p>
+            <StarRating rating={arvostelu.arvosana} />
           </div>
           <div className="nappi">
             <button
@@ -157,6 +172,7 @@ export default function Arvostelut() {
                 setTrigger(true);
                 setName(arvostelu.title);
                 setOverview(arvostelu.overview);
+                setStudioName(arvostelu.studioName);
               }}
             >
               Lisätiedot
@@ -167,6 +183,7 @@ export default function Arvostelut() {
       <Popup trigger={triggerState}>
         <p>{name}</p>
         <p>{overview}</p>
+        <p>{studioName}</p>
         <button onClick={() => setTrigger(false)}>Sulje</button>
       </Popup>
     </div>

@@ -54,30 +54,29 @@ export default function UusiArvostelu() {
   }
   return (
     <div>
-      <h3>Uusi arvostelu</h3>
-      <p>{mediaType}</p>
-      <p>{movieId}</p>
-      <p>{title}</p>
-
-      <div>
-        <label>Select Rating:</label>
-        <select value={rating} onChange={handleChange}>
-          <option value="">Select</option>
-          {[...Array(5).keys()].map((num) => (
-            <option key={num + 1} value={num + 1}>
-              {num + 1}
-            </option>
-          ))}
-        </select>
+      <h1>Uusi arvostelu</h1>
+      <div className="uusiarvostelucontainer">
+        <div>
+          <label>Select Rating:</label>
+          <select value={rating} onChange={handleChange}>
+            <option value="">Select</option>
+            {[...Array(5).keys()].map((num) => (
+              <option key={num + 1} value={num + 1}>
+                {num + 1}
+              </option>
+            ))}
+          </select>
+        </div>
+        <textarea
+          className="textinput"
+          type="text"
+          alue={text}
+          onChange={textChange}
+        ></textarea>
+        <div className="uusiarvostelunappi">
+          <button onClick={setReview}>Lähetä arvostelu</button>
+        </div>
       </div>
-      <textarea
-        className="textinput"
-        type="text"
-        alue={text}
-        onChange={textChange}
-      ></textarea>
-      <div></div>
-      <button onClick={setReview}>Lähetä arvostelu</button>
     </div>
   );
 }

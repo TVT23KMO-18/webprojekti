@@ -5,13 +5,17 @@
   width: 80%;
   height: 500px;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: var(--dark-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-
+.popupcontainer p {
+  color: var(--light-color);
+  width: 80%;
+  text-align: center;
+}
 .popupcontainer img {
   margin-bottom: 10px;
 }
@@ -20,10 +24,7 @@
   width: 50%;
   margin-bottom: 10px;
 }
-.linkkinappi .napit button {
-  width: 50%;
-  margin-bottom: 10px;
-}
+
 p {
   margin-bottom: 30px;
 }

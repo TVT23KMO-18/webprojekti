@@ -1,5 +1,5 @@
 import React from "react";
-import "./StarRating.css"; // Import CSS file for styling
+import "./StarRating.css";
 
 const StarRating = ({ rating }) => {
   const renderStars = () => {
@@ -10,13 +10,13 @@ const StarRating = ({ rating }) => {
           <span key={i} className="ratingstart">
             &#9733;
           </span>
-        ); // Yellow star
+        ); 
       } else {
         stars.push(
           <span key={i} className="noratingstart">
             &#9734;
           </span>
-        ); // White star
+        );
       }
     }
     return stars;

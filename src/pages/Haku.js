@@ -188,9 +188,6 @@ export default function Haku() {
         >
           Sulje
         </button>
-
-        <p>id:{movieId}</p>
-        <p>{mediaType}</p>
       </Popup>
     </div>
   );

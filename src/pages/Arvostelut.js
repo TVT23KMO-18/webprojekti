@@ -41,6 +41,7 @@ export default function Arvostelut() {
             title = movieData.title;
             movieImage = movieData.movieImage;
             overview = movieData.overview;
+            studioName = movieData.studioName;
             type = "Sarja";
           }
 
@@ -180,10 +181,11 @@ export default function Arvostelut() {
           </div>
         </div>
       ))}
-      <Popup trigger={triggerState}>
+      <Popup className="lisätieto" trigger={triggerState}>
         <p>{name}</p>
+        <p>Made by:{studioName}</p>
         <p>{overview}</p>
-        <p>{studioName}</p>
+
         <button onClick={() => setTrigger(false)}>Sulje</button>
       </Popup>
     </div>

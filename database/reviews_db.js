@@ -7,7 +7,12 @@ const sql = {
 };
 
 async function addReview(iduser, review, num, movieid, serieid) {
-  await pgPool.query(sql.ADD_REVIEW, [iduser, review, num, movieid, serieid]);
+  try {
+    await pgPool.query(sql.ADD_REVIEW, [iduser, review, num, movieid, serieid]);
+  } catch (error) {
+    console.log(error);
+    throw new Error(error.message);
+  }
 }
 
 async function getReviews() {

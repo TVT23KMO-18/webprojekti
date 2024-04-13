@@ -13,6 +13,7 @@ export default function UusiArvostelu() {
 
   const handleChange = (e) => {
     setRating(e.target.value);
+    console.log(e.target.value);
   };
 
   const textChange = (e) => {
@@ -47,8 +48,10 @@ export default function UusiArvostelu() {
           },
         }
       );
+      window.alert("Arvostelu lisätty");
       console.log("Arvostelu lisätty", response.data);
     } catch (error) {
+      window.alert("Valitse arvosana");
       console.error(error);
     }
   }

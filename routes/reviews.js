@@ -9,14 +9,17 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", auth, async (req, res) => {
-  await addReview(
-    req.body.iduser,
-    req.body.review_text,
-    req.body.review_num,
-    req.body.movieid,
-    req.body.serieid
-  );
-  res.end();
+  const { iduser, review_text, review_num, movieid, serieid } = req.body;
+  if (!review_num) {
+    return res.status(400).json({ error: "Review number is required." });
+  }
+  try {
+    await addReview(iduser, review_text, review_num, movieid, serieid);
+    res.end();
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error." });
+  }
 });
 
 module.exports = router;

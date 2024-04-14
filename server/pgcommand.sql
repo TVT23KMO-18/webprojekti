@@ -58,4 +58,7 @@ ADD COLUMN serieid INT;
 ALTER TABLE reviews
 ALTER COLUMN movieid DROP NOT NULL;
 
+ALTER TABLE "group"
+ADD COLUMN "description" TEXT
+
 TRUNCATE TABLE reviews;

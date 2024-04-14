@@ -42,20 +42,6 @@ async function deleteUser(username) {
     } catch(err) {
         console.log(err.message);
     }
-
-    /*try {  
-        const result = await pgPool.query('SELECT iduser FROM users WHERE username=$1', [username]);
-        const idUser = result.rows[0].iduser;
-        await pgPool.query('DELETE FROM favourites WHERE iduser=$1', [idUser])
-        let result2 = await pgPool.query('SELECT idgroup FROM group_membership WHERE iduser=$1', [idUser])
-        let idGroup = result2.rows[0].idgroup
-        await pgPool.query('DELETE FROM group_membership WHERE iduser=$1', [idUser])
-        await pgPool.query('DELETE FROM "group" WHERE idgroup=$1', [idGroup])
-        await pgPool.query('DELETE FROM reviews WHERE iduser=$1', [idUser])
-        await pgPool.query('DELETE FROM users WHERE iduser=$1', [idUser])
-    } catch(err) {
-        console.log(err.message)
-    }*/
 }
 
 module.exports = {getUsers, getOneUser, addUser, deleteUser}

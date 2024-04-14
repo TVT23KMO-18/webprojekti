@@ -11,14 +11,26 @@ async function getGroups(username) {
     return result.rows
 }
 
-async function createGroup(username, groupname) {
+async function allGroups() {
+    let result = await pgPool.query('SELECT groupname, description FROM "group"')
+    return result.rows
+}
+
+async function createGroup(username, groupname, description) {
     let user = await pgPool.query('SELECT iduser FROM users WHERE username=$1', [username]);
     let idUser = user.rows[0].iduser;
-    await pgPool.query('INSERT INTO "group" (groupname) VALUES ($1)', [groupname]);
+    await pgPool.query('INSERT INTO "group" (groupname, description) VALUES ($1,$2)', [groupname, description]);
     let result = await pgPool.query('SELECT idgroup FROM "group" WHERE groupname=$1', [groupname]);
     let idGroup = result.rows[0].idgroup;
     await pgPool.query('INSERT INTO "group_membership" (iduser, idgroup) VALUES($1,$2)', [idUser, idGroup])
 }
 
+async function allUsernameGroups(username) {
+    let user = await pgPool.query('SELECT iduser FROM users WHERE username=$1', [username]);
+    let idUser = user.rows[0].iduser;
+    let result = await pgPool.query('SELECT groupname, "description" FROM "group" WHERE idgroup NOT IN (SELECT idgroup FROM group_membership WHERE iduser = $1)', [idUser]);
+    return result.rows;
+}
 
-module.exports = { getGroups, createGroup }
+
+module.exports = { getGroups, createGroup, allGroups, allUsernameGroups }

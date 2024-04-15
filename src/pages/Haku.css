@@ -33,3 +33,10 @@ img {
   width: 200px;
   margin: 10px;
 }
+
+.napit button{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 30px;
+}

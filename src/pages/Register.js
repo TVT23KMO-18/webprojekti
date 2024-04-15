@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import './Register.css'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Register_user() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const navigate = useNavigate();
 
     const register = async (data) => {
         const json = JSON.stringify(data)
@@ -18,6 +20,7 @@ export default function Register_user() {
             const response = await axios.post('http://localhost:3001/auth/register', json, options);
             console.log(response);
             alert("Käyttäjä luotiin. Voit nyt kirjautua sisään tunnuksellasi.");
+            navigate("/login")
         } catch (error) {
             if (error.response && error.response.data && error.response.data.message) {
                 alert(error.response.data.message);

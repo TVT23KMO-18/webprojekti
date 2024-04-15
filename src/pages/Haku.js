@@ -170,7 +170,7 @@ export default function Haku() {
           src={`https://image.tmdb.org/t/p/w200${PopupPosterPath}`}
           alt="Poster"
         />
-        <div className="napit"></div>
+        <div className="napit">
         <button>Lisää suosikkeihin</button>
 
         <Link
@@ -188,6 +188,7 @@ export default function Haku() {
         >
           Sulje
         </button>
+        </div>
       </Popup>
     </div>
   );

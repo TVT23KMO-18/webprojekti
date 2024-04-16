@@ -87,6 +87,7 @@ describe('/Register, login and delete user with right params', () => {
 });
 
 describe('/Register, login, delete, access with wrong params', () => {
+
     it('Should reject registration without user', async function () {
         try {
             const res = await chai.request(server)
@@ -102,7 +103,8 @@ describe('/Register, login, delete, access with wrong params', () => {
             throw new Error(err);
         }
     }); 
-       it('Should reject registration without password', async function () {
+
+    it('Should reject registration without password', async function () {
         try {
             const res = await chai.request(server)
                 .post('/auth/register')
@@ -127,6 +129,36 @@ describe('/Register, login, delete, access with wrong params', () => {
             chai.expect(res).to.have.status(404);
             chai.expect(res.body).to.have.property('success').to.equal(false);
             chai.expect(res.body).to.have.property('message').to.equal("Käyttäjää ei löytynyt");
+        } catch (err) {
+            throw new Error(err);
+        }
+    });
+
+    it('Should reject login without username', async function () {
+        try {
+            const res = await chai.request(server)
+                .post('/auth/login')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send({ password: 'testi' });
+
+            chai.expect(res).to.have.status(400); 
+            chai.expect(res.body).to.have.property('success').to.equal(false);
+            chai.expect(res.body).to.have.property('message').to.equal('Käyttäjänimi tai salasana puuttuu.');
+        } catch (err) {
+            throw new Error(err);
+        }
+    }); 
+
+    it('Should reject login without password', async function () {
+        try {
+            const res = await chai.request(server)
+                .post('/auth/login')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send({ username: 'testuser' });
+
+                chai.expect(res).to.have.status(400); 
+                chai.expect(res.body).to.have.property('success').to.equal(false);
+                chai.expect(res.body).to.have.property('message').to.equal('Käyttäjänimi tai salasana puuttuu.');
         } catch (err) {
             throw new Error(err);
         }

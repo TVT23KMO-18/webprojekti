@@ -27,8 +27,8 @@ async function createGroup(username, groupname, description) {
   ]);
   let idUser = user.rows[0].iduser;
   await pgPool.query(
-    'INSERT INTO "group" (groupname, description) VALUES ($1,$2)',
-    [groupname, description]
+    'INSERT INTO "group" (groupname, description, owner) VALUES ($1,$2,$3)',
+    [groupname, description, username]
   );
   let result = await pgPool.query(
     'SELECT idgroup FROM "group" WHERE groupname=$1',

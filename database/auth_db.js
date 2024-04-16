@@ -8,13 +8,14 @@ const sql = {
 
 async function register(username, pwHash) {
   try {
+    if (!username || !pwHash) {
+      throw new Error("Username and password are required");
+    }
     await pgPool.query(sql.REGISTER, [username, pwHash]);
   } catch (err) {
     if (err.code === "23505" && err.constraint === "users_username_key") {
-      console.log("Duplicate username error:", err.message);
       throw new Error("Username already exists");
     } else {
-      console.error("Other error:", err.message);
       throw new Error(err.message);
     }
   }

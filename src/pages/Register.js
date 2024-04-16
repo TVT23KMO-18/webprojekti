@@ -39,6 +39,9 @@ export default function Register_user() {
             await register(data);
             console.log(data);
         }
+        else{
+            alert("Käyttäjänimi tai salasana puuttuu")
+        }
     }
 
     return (

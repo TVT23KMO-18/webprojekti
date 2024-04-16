@@ -19,7 +19,7 @@ async function allGroups() {
 async function createGroup(username, groupname, description) {
     let user = await pgPool.query('SELECT iduser FROM users WHERE username=$1', [username]);
     let idUser = user.rows[0].iduser;
-    await pgPool.query('INSERT INTO "group" (groupname, description) VALUES ($1,$2)', [groupname, description]);
+    await pgPool.query('INSERT INTO "group" (groupname, description, owner) VALUES ($1,$2,$3)', [groupname, description, username]);
     let result = await pgPool.query('SELECT idgroup FROM "group" WHERE groupname=$1', [groupname]);
     let idGroup = result.rows[0].idgroup;
     await pgPool.query('INSERT INTO "group_membership" (iduser, idgroup) VALUES($1,$2)', [idUser, idGroup])

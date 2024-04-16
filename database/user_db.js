@@ -38,7 +38,10 @@ async function deleteUser(username) {
         const idGroups = groupMembershipResult.rows.map(row => row.idgroup);
         await pgPool.query('DELETE FROM group_membership WHERE iduser=$1', [idUser]);
         for (const idGroup of idGroups) {
-            await pgPool.query('DELETE FROM "group" WHERE idgroup=$1', [idGroup]);
+            const owner = await pgPool.query('SELECT owner FROM "group" WHERE idgroup=$1', [idGroup])
+            if(username == owner.rows[0].owner) {
+                await pgPool.query('DELETE FROM "group" WHERE idgroup=$1', [idGroup]);
+            }
         }
         await pgPool.query('DELETE FROM reviews WHERE iduser=$1', [idUser]);
         await pgPool.query('DELETE FROM users WHERE iduser=$1', [idUser]);      

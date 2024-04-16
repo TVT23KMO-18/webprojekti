@@ -1,7 +1,6 @@
 let chai = require('chai');
 let chaiHttp = require('chai-http');
 let server = require('../app');
-const { password } = require('pg/lib/defaults');
 chai.use(chaiHttp);
 
 function makeid(length) {
@@ -66,7 +65,7 @@ describe('/Register, login and delete user with right params', () => {
             chai.expect(res).to.have.status(200);
             chai.expect(res.body).to.be.an('object');
             chai.expect(res.body).to.have.property('jwtToken');
-
+            
         } catch (err) {
             throw new Error(err);
         }
@@ -87,7 +86,7 @@ describe('/Register, login and delete user with right params', () => {
     }); 
 });
 
-describe('/Register, login, access with wrong params', () => {
+describe('/Register, login, delete, access with wrong params', () => {
     it('Should reject registration without user', async function () {
         try {
             const res = await chai.request(server)
@@ -126,11 +125,29 @@ describe('/Register, login, access with wrong params', () => {
                 .send({ username: 'nonexistentuser', password: 'incorrectpassword' });
 
             chai.expect(res).to.have.status(404);
-            chai.expect(res.body).to.have.property('error').to.equal('User not found');
+            chai.expect(res.body).to.have.property('success').to.equal(false);
+            chai.expect(res.body).to.have.property('message').to.equal("Käyttäjää ei löytynyt");
         } catch (err) {
             throw new Error(err);
         }
     });
+
+    it('Should not be able to delete a user that does not exist', async function () {
+        try {
+            const res = await chai.request(server)
+                .post('/user/deleteuser')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .query({ username: "fakeuser5334" });
+
+            chai.expect(res).to.have.status(404);
+            chai.expect(res.body).to.have.property('success').to.equal(false);
+            chai.expect(res.body).to.have.property('message').to.equal('Käyttäkää ei löydy');
+
+        } catch (err) {
+            throw new Error(err);
+        }
+    }); 
+
 
     it('Should reject access to authenticated routes without valid JWT token', async function () {
         try {

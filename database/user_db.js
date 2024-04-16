@@ -29,6 +29,9 @@ async function addUser(username, password) {
 async function deleteUser(username) {
     try {
         const result = await pgPool.query('SELECT iduser FROM users WHERE username=$1', [username]);
+        if (result.rows.length === 0) {
+            throw new Error('User not found');
+        }
         const idUser = result.rows[0].iduser;
         await pgPool.query('DELETE FROM favourites WHERE iduser=$1', [idUser]);
         const groupMembershipResult = await pgPool.query('SELECT idgroup FROM group_membership WHERE iduser=$1', [idUser]);
@@ -40,7 +43,7 @@ async function deleteUser(username) {
         await pgPool.query('DELETE FROM reviews WHERE iduser=$1', [idUser]);
         await pgPool.query('DELETE FROM users WHERE iduser=$1', [idUser]);      
     } catch(err) {
-        console.log(err.message);
+        throw err;
     }
 }
 

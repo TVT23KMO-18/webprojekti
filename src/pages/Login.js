@@ -15,6 +15,9 @@ export default function Login() {
             const data = {"username": username, "password": password}
             login(data)
         }
+        else{
+            alert("Käyttäjänimi tai salasana puuttuu")
+        }
     }
 
 

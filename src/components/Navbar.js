@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { useUser } from '../context/useUser';
@@ -10,6 +10,18 @@ export default function Navbar() {
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth > 800) {
+                setIsMenuOpen(false);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     return (
         <nav>
@@ -43,13 +55,13 @@ export default function Navbar() {
             </ul>
             <div id='logindiv'>
                 <ul>
-                <li>
-                    {user === null ? (
-                        <Link to="/login">Kirjaudu</Link>
-                    ) : (
-                        <Link to="/logout">Kirjaudu ulos</Link>
-                    )}
-                </li>
+                    <li>
+                        {user === null ? (
+                            <Link to="/login">Kirjaudu</Link>
+                        ) : (
+                            <Link to="/logout">Kirjaudu ulos</Link>
+                        )}
+                    </li>
                 </ul>
             </div>
         </nav>

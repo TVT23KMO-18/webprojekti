@@ -61,9 +61,9 @@ export default function UusiArvostelu() {
       <h1>Uusi arvostelu</h1>
       <div className="uusiarvostelucontainer">
         <div>
-          <label>Select Rating:</label>
+          <label>Select Rating: </label>
           <select value={rating} onChange={handleChange}>
-            <option value="">Select</option>
+            <option value="">Anna arvosana</option>
             {[...Array(5).keys()].map((num) => (
               <option key={num + 1} value={num + 1}>
                 {num + 1}

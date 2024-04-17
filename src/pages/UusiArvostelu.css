@@ -8,18 +8,36 @@
   display: flex;
   flex-direction: column;
 }
+
+.uusiarvostelucontainer select {
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  height: 30px;
+  width: 120px;
+  margin-left: 10px;
+}
+
+.uusiarvostelucontainer option {
+  background-color: var(--light-color);
+  color: var(--dark-color);
+}
+
 h1 {
   text-align: center;
 }
 textarea {
   height: 400px;
-  width: 500px;
+  width: 50%;
   padding: 5px;
   margin-top: 20px;
   background-color: var(--light-color);
   color: var(--dark-color);
 }
 
-.uusiarvostelunappi {
+.uusiarvostelunappi button {
   margin-top: 20px;
+  height: 35px;
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  font-size: larger;
 }

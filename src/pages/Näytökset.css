@@ -7,7 +7,7 @@
 .moviediv {
   display: flex;
   margin-bottom: 10px;
-  border: 2px solid gray;
+  border: 2px solid var(--light-color);
 }
 .row {
   flex: 2;
@@ -73,5 +73,17 @@
 .virhediv {
   text-align: center;
   margin-top: 120px;
+  color: var(--dark-color);
+}
+
+.selectit select {
+  
+  background-color: var(--light-color);
+  color: var(--dark-color);
+}
+
+.selectit option {
+  
+  background-color: var(--light-color);
   color: var(--dark-color);
 }

@@ -1,11 +1,9 @@
-img {
-  height: 300px;
-  width: 200px;
-  margin: 10px;
+#haku-container img:hover {
+  cursor: pointer;
 }
 
-img:hover {
-  cursor: pointer;
+#haku-container {
+  margin-bottom: 80px;
 }
 
 .painike {
@@ -16,19 +14,40 @@ img:hover {
   gap: 5px;
 }
 
+.painike input {
+  height: 30px;
+  width: auto;
+  background-color: var(--light-color);
+  color: var(--dark-color);
+}
+
+.painike select {
+  height: 30px;
+  width: 100px;
+  background-color: var(--light-color);
+  color: var(--dark-color);
+}
+
+.painike button {
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  height: 30px;
+  width: 100px;
+  font-size: larger;
+}
+
+.painike option{
+  background-color: var(--light-color);
+  color: var(--dark-color);
+}
+
 .elokuvaKansi {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-img {
-  height: 300px;
-  width: 200px;
-  margin: 10px;
-}
-
-#login-container img {
+#haku-container img {
   height: 300px;
   width: 200px;
   margin: 10px;
@@ -37,6 +56,47 @@ img {
 .napit button{
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 30px;
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  height: 40px;
+  width: 200px;
+  font-size: larger;
+}
+
+.nav-link {
+  text-decoration: none;
+}
+
+.napit {
+  background-color: var(--dark-color);
+}
+
+@media screen and (max-width: 800px) {
+  .painike {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .painike input,
+  .painike select,
+  .painike button {
+    width: 50%;
+  }
+
+  .elokuvaKansi {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  #haku-container img {
+    height: 200px;
+    width: 150px;
+  }
+
+  .napit button {
+    height: 30px;
+    width: 150px;
+    font-size: medium;
+  }
 }

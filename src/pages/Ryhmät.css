@@ -44,7 +44,17 @@
 
 .ryhmanimi-input {
     display: flex;
+
 }
+
+.ryhmanimi-input button {
+        background-color: var(--light-color);
+        color: var(--dark-color);
+        height: 50px;
+        width: 100px;
+        font-size: larger;
+    }
+
 
 .liittymispyynnot > div {
     display: flex;

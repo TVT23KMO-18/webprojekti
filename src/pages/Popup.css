@@ -14,6 +14,7 @@
 }
 .popupcontainer p {
   color: var(--light-color);
+  background-color: var(--dark-color);
   width: 80%;
   text-align: center;
 }
@@ -22,8 +23,11 @@
 }
 
 .popupcontainer button {
+  background-color: var(--light-color);
+  color: var(--dark-color);
   width: 50%;
   margin-bottom: 10px;
+  font-size: larger;
 }
 
 p {

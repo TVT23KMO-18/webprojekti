@@ -15,3 +15,8 @@ div#register-form label {
 div#register-form button {
     width: 50px;
 }
+
+div#register-form input {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+}

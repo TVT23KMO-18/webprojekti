@@ -26,3 +26,8 @@
 #register {
     margin: 50px;
 }
+
+#login-form input{
+    background-color: var(--light-color);
+    color: var(--dark-color);
+}

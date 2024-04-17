@@ -16,6 +16,8 @@ textarea {
   width: 500px;
   padding: 5px;
   margin-top: 20px;
+  background-color: var(--light-color);
+  color: var(--dark-color);
 }
 
 .uusiarvostelunappi {

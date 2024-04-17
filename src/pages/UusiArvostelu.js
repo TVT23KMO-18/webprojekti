@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import axios from "axios";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./UusiArvostelu.css";
 import { UserContext } from "../context/UserContext";
 
@@ -10,6 +10,7 @@ export default function UusiArvostelu() {
   const [rating, setRating] = useState("");
   const [text, setText] = useState("");
   const { userid, token } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setRating(e.target.value);
@@ -49,7 +50,7 @@ export default function UusiArvostelu() {
         }
       );
       window.alert("Arvostelu lisätty");
-      console.log("Arvostelu lisätty", response.data);
+      navigate("/arvostelut")
     } catch (error) {
       window.alert("Valitse arvosana");
       console.error(error);

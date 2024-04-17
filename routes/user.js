@@ -9,7 +9,6 @@ router.get('/', async (req, res) => {
 
 router.get('/oneuser', async (req, res) => {
     const oneUser = await getOneUser(req.query.iduser);
-    console.log(oneUser);
     res.json(oneUser);
 })
 

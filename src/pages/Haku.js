@@ -171,23 +171,23 @@ export default function Haku() {
           alt="Poster"
         />
         <div className="napit">
-        <button>Lisää suosikkeihin</button>
+          <button>Lisää suosikkeihin</button>
 
-        <Link
-          to={`/uusiarvostelu/${mediaType}/${movieId}/${name}`}
-          className="nav-link"
-        >
-          <button>Arvostele</button>
-        </Link>
+          <Link
+            to={`/uusiarvostelu/${mediaType}/${movieId}/${name}`}
+            className="nav-link"
+          >
+            <button>Arvostele</button>
+          </Link>
 
-        <button
-          onClick={() => {
-            setTrigger(false);
-            setPopupPosterPath("");
-          }}
-        >
-          Sulje
-        </button>
+          <button
+            onClick={() => {
+              setTrigger(false);
+              setPopupPosterPath("");
+            }}
+          >
+            Sulje
+          </button>
         </div>
       </Popup>
     </div>

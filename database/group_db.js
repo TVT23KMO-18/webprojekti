@@ -6,7 +6,7 @@ async function getGroups(username) {
   ]);
   let idUser = user.rows[0].iduser;
   let result = await pgPool.query(
-    "SELECT g.groupname " +
+    "SELECT g.idgroup, g.groupname " +
       "FROM group_membership gm " +
       'JOIN "group" g ON gm.idgroup = g.idgroup ' +
       "WHERE gm.iduser = $1",
@@ -17,7 +17,9 @@ async function getGroups(username) {
 }
 
 async function allGroups() {
-  let result = await pgPool.query('SELECT groupname, description FROM "group"');
+  let result = await pgPool.query(
+    'SELECT idgroup, groupname, description FROM "group"'
+  );
   return result.rows;
 }
 

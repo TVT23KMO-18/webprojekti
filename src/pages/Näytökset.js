@@ -48,12 +48,13 @@ function Näytökset() {
 
           const ShowURLElement = showElement.querySelector("ShowURL");
           const ShowURL = ShowURLElement.textContent;
-
+          const eventIdElement = showElement.querySelector("EventID");
+          const eventID = eventIdElement.textContent;
+          console.log(eventID);
           const TheatreAuditoriumElement = showElement.querySelector(
             "TheatreAndAuditorium"
           );
           const TheatreAuditorium = TheatreAuditoriumElement.textContent;
-
           moviesData.push({
             title,
             rating,
@@ -61,6 +62,7 @@ function Näytökset() {
             imageUrl,
             ShowURL,
             TheatreAuditorium,
+            eventID,
           });
         });
 
@@ -148,6 +150,7 @@ function Näytökset() {
           <div className="row">
             <div className="title">
               <h3>{movie.title}</h3>
+              <p>{selectedDate}</p>
             </div>
             <div className="sali">
               <p>{movie.TheatreAuditorium}</p>

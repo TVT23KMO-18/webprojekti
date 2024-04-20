@@ -1,0 +1,9 @@
+.Ryhmänomansivuncontainer {
+  display: flex;
+}
+.ryhmällejaetutelokuvat {
+  flex: 1;
+}
+.jaetutarvostelut {
+  flex: 1;
+}

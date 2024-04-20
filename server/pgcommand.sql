@@ -65,3 +65,27 @@ ALTER TABLE "group"
 ADD COLUMN "owner" TEXT
 
 TRUNCATE TABLE reviews;
+
+CREATE TABLE group_movies (
+    idgroup_movies SERIAL PRIMARY KEY,
+    serieid INT,
+    movieid INT,
+    idgroup INT,
+    iduser INT,
+    FOREIGN KEY (iduser) REFERENCES users(iduser) ON DELETE CASCADE,
+    FOREIGN KEY (idgroup) REFERENCES "group"(idgroup) ON DELETE CASCADE
+);
+
+CREATE TABLE group_reviews (
+    idgroup_reviews SERIAL PRIMARY KEY,
+    idgroup INT,
+    idreviews INT,
+    FOREIGN KEY (idgroup) REFERENCES "group"(idgroup),
+    FOREIGN KEY (idreviews) REFERENCES reviews(idreviews)
+);
+CREATE TABLE group_event(
+    idshow SERIAL PRIMARY KEY,
+    eventid INTEGER NOT NULL,
+    idgroup INTEGER,
+    FOREIGN KEY (idgroup) REFERENCES "group"(idgroup)
+);

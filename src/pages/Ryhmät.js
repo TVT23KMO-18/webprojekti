@@ -15,13 +15,16 @@ export default function Ryhmät() {
     const fetchGroups = async () => {
       try {
         if (user && user.username) {
+          console.log("yeah");
           const response = await axios.get(
             `http://localhost:3001/group/groups?username=${user.username}`
           );
-          const groupNames = Object.values(response.data).map(
-            (group) => group.groupname
-          );
-          setGroups(groupNames);
+          const groupData = Object.values(response.data).map((group) => ({
+            idgroup: group.idgroup,
+            groupname: group.groupname,
+          }));
+          console.log(groupData);
+          setGroups(groupData);
         }
       } catch (error) {
         console.error("Error fetching groups:", error);
@@ -42,7 +45,6 @@ export default function Ryhmät() {
           const response = await axios.get(
             `http://localhost:3001/group/groupsbyusername?username=${user.username}`
           );
-          console.log(response.data);
           setAllGroups(response.data);
         }
       } catch (error) {
@@ -92,7 +94,11 @@ export default function Ryhmät() {
             <ul>
               {groups.map((group, index) => (
                 <li key={index}>
-                  <Link to={"/ryhmänomasivu"}>{group}</Link>
+                  <Link
+                    to={`/ryhmanomasivu/${group.idgroup}/${group.groupname}`}
+                  >
+                    {group.groupname}
+                  </Link>
                 </li>
               ))}
             </ul>

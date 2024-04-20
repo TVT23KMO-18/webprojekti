@@ -29,7 +29,10 @@ function App() {
           <Route path="/" exact element={<Etusivu />} />
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
-          <Route path="/ryhmänomasivu/:idgroup" element={<RyhmänOmaSivu />} />
+          <Route
+            path="/ryhmanomasivu/:idgroup/:groupname"
+            element={<RyhmänOmaSivu />}
+          />
           <Route
             path="/uusiarvostelu/:mediaType/:movieId/:title"
             element={<UusiArvostelu />}

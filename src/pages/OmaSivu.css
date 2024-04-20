@@ -1,7 +1,13 @@
-.omasivu-container {
-    width: 100vw;
-    height: 100vh;
+#omasivu-container {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+    height: 20vh; 
+}
+#omasivu-container button {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    height: 50px;
+    width: 100px;
+    font-size: larger;
 }

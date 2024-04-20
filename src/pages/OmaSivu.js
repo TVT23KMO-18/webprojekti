@@ -22,7 +22,7 @@ export default function Poistakayttaja() {
 
 
   return (
-    <div className="omasivu-container">
+    <div id="omasivu-container">
         <button onClick={poista} id="delete">Poista Käyttäjä</button>
     </div>
   )

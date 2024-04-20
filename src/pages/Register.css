@@ -1,6 +1,7 @@
 div#register-form {
     display: flex;
     justify-content: center;
+    margin-top: 100px;
 }
 
 div#register-form div {
@@ -13,5 +14,14 @@ div#register-form label {
 }
 
 div#register-form button {
-    width: 50px;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    height: 50px;
+    width: 100%;
+    font-size: larger;
+}
+
+div#register-form input {
+    background-color: var(--light-color);
+    color: var(--dark-color);
 }

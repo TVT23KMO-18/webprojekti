@@ -14,7 +14,9 @@ async function getUsers() {
 
 async function getOneUser(iduser) {
     let result = await pgPool.query(sql.GET_USERNAME, [iduser])
-
+    if(result.rows.length === 0) {
+        throw new Error('Käyttäjää ei löydy')
+    }
     return result.rows
 }
 

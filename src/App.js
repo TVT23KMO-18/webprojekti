@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Footer from "./components/Footer";
-import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import Etusivu from "./pages/Etusivu";
 import NotFound from "./pages/NotFound";
@@ -22,7 +21,6 @@ import RyhmänOmaSivu from "./pages/RyhmänOmaSivu";
 function App() {
   return (
     <UserProvider>
-      <Header></Header>
       <Navbar></Navbar>
       <div className="container">
         <Routes>

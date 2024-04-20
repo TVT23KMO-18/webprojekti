@@ -8,8 +8,7 @@
 .arvostelut {
   display: flex;
   margin-bottom: 10px;
-  border: 2px solid gray;
-  background-color: var(--dark-color);
+  border: 2px solid var(--light-color);
 }
 
 .row {
@@ -55,7 +54,6 @@
     flex-direction: column;
     margin-bottom: 20px;
     border: 2px solid gray;
-    background-color: var(--dark-color);
     overflow: hidden;
   }
 

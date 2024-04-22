@@ -111,8 +111,8 @@ export default function Favorites() {
           )}
           <div className="details">
             <h3>{favorite.title}</h3>
-            <p>Type: {favorite.type}</p>
-            <p>Made by: {favorite.studioName}</p>
+            <p>Tyyppi: {favorite.type}</p>
+            <p>Studion nimi: {favorite.studioName}</p>
             <p>{favorite.overview}</p>
           </div>
         </div>

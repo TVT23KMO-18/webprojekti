@@ -55,4 +55,14 @@ async function allUsernameGroups(username) {
   return result.rows;
 }
 
-module.exports = { getGroups, createGroup, allGroups, allUsernameGroups };
+async function deleteGroup(id) {
+  await pgPool.query('DELETE FROM "group" WHERE idgroup=$1', [id]);
+}
+
+module.exports = {
+  getGroups,
+  createGroup,
+  allGroups,
+  allUsernameGroups,
+  deleteGroup,
+};

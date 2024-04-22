@@ -3,6 +3,7 @@ const {
   createGroup,
   allGroups,
   allUsernameGroups,
+  deleteGroup,
 } = require("../database/group_db");
 
 const router = require("../server/node_modules/express").Router();
@@ -52,6 +53,15 @@ router.post("/", async (req, res) => {
     res
       .status(500)
       .json({ success: false, message: "Virhe ryhmän luomisessa" });
+  }
+});
+
+router.delete("/", async (req, res) => {
+  try {
+    deleteGroup(req.body.idgroup);
+    res.json("Ryhmä poistettu");
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error." });
   }
 });
 

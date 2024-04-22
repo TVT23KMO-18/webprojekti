@@ -1,6 +1,6 @@
 require("dotenv").config();
 const user = require("../routes/user");
-const favourites = require("../routes/favourites");
+const favorites = require("../routes/favorites");
 const group = require("../routes/group");
 const reviews = require("../routes/reviews");
 const groupMembership = require("../routes/group_membership");
@@ -22,7 +22,7 @@ const port = process.env.port || 3001;
 
 // Routes
 app.use("/user", user);
-app.use("/favourites", favourites);
+app.use("/favorites", favorites);
 app.use("/group", group);
 app.use("/reviews", reviews);
 app.use("/groupmembership", groupMembership);

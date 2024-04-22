@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import "./Haku.css";
 import Popup from "./Popup";
 import { Link } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
 
 export default function Haku() {
   const [media, setMedia] = useState([]);
@@ -18,6 +19,7 @@ export default function Haku() {
   const [PopupPosterPath, setPopupPosterPath] = useState("");
   const [movieId, setMovieId] = useState("");
   const [name, setName] = useState("");
+  const { userid} = useContext(UserContext);
 
   const getMedia = async () => {
     try {
@@ -108,6 +110,39 @@ export default function Haku() {
     getMedia();
   };
 
+  async function addToFavorites() {
+    try {
+      let movieid = null;
+      let serieid = null;
+      if (mediaType === "movie") {
+        movieid = movieId;
+      } else {
+        serieid = movieId;
+      }
+  
+      const response = await axios.post(
+        "http://localhost:3001/favorites/addfavorite",
+        {
+          iduser: userid,
+          movieid: movieid,
+          serieid: serieid,
+          shareable_link: null, 
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+  
+      alert("Media lisätty suosikkeihin onnistuneesti!");
+    } catch (error) {
+
+      console.error("Error adding media to favorites:", error);
+      alert("Suosikkeihin lisääminen epäonnistui. Yritä myöhemmin uudestaan.");
+    }
+  }
+
   return (
     <div id="haku-container">
       <div className="painike">
@@ -171,23 +206,23 @@ export default function Haku() {
           alt="Poster"
         />
         <div className="napit">
-        <button>Lisää suosikkeihin</button>
+          <button onClick={() => addToFavorites(movieId, mediaType)}>Lisää suosikkeihin</button>
 
-        <Link
-          to={`/uusiarvostelu/${mediaType}/${movieId}/${name}`}
-          className="nav-link"
-        >
-          <button>Arvostele</button>
-        </Link>
+          <Link
+            to={`/uusiarvostelu/${mediaType}/${movieId}/${name}`}
+            className="nav-link"
+          >
+            <button>Arvostele</button>
+          </Link>
 
-        <button
-          onClick={() => {
-            setTrigger(false);
-            setPopupPosterPath("");
-          }}
-        >
-          Sulje
-        </button>
+          <button
+            onClick={() => {
+              setTrigger(false);
+              setPopupPosterPath("");
+            }}
+          >
+            Sulje
+          </button>
         </div>
       </Popup>
     </div>

@@ -1,47 +1,13 @@
---
--- PostgreSQL database dump
---
-
--- Dumped from database version 16.2
--- Dumped by pg_dump version 16.1
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
---
--- Name: public; Type: SCHEMA; Schema: -; Owner: pg_database_owner
---
-
-CREATE SCHEMA public;
-
-
-ALTER SCHEMA public OWNER TO pg_database_owner;
-
---
--- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: pg_database_owner
---
-
-COMMENT ON SCHEMA public IS 'standard public schema';
-
-
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
 --
--- Name: favourites; Type: TABLE; Schema: public; Owner: postgres
+-- Name: favorites; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.favourites (
-    favoriteid integer NOT NULL,
+CREATE TABLE public.favorites (
+    favoriteid SERIAL PRIMARY KEY,
     iduser integer NOT NULL,
     movieid integer,
     serieid integer,
@@ -49,7 +15,7 @@ CREATE TABLE public.favourites (
 );
 
 
-ALTER TABLE public.favourites OWNER TO postgres;
+ALTER TABLE public.favorites OWNER TO postgres;
 
 --
 -- Name: group; Type: TABLE; Schema: public; Owner: postgres
@@ -224,11 +190,11 @@ ALTER TABLE ONLY public.users ALTER COLUMN iduser SET DEFAULT nextval('public.us
 
 
 --
--- Name: favourites favourites_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: favorites favorites_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.favourites
-    ADD CONSTRAINT favourites_pkey PRIMARY KEY (favoriteid);
+ALTER TABLE ONLY public.favorites
+    ADD CONSTRAINT favorites_pkey PRIMARY KEY (favoriteid);
 
 
 --
@@ -272,11 +238,11 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: favourites fk_favourites_iduser; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: favorites fk_favorites_iduser; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.favourites
-    ADD CONSTRAINT fk_favourites_iduser FOREIGN KEY (iduser) REFERENCES public.users(iduser) ON DELETE CASCADE;
+ALTER TABLE ONLY public.favorites
+    ADD CONSTRAINT fk_favorites_iduser FOREIGN KEY (iduser) REFERENCES public.users(iduser) ON DELETE CASCADE;
 
 
 --
@@ -298,4 +264,3 @@ ALTER TABLE ONLY public.reviews
 --
 -- PostgreSQL database dump complete
 --
-

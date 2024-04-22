@@ -17,6 +17,7 @@ import UusiArvostelu from "./pages/UusiArvostelu";
 import UserProvider from "./context/UserProvider";
 import PrivateRoute from "./pages/PrivateRoute";
 import RyhmänOmaSivu from "./pages/RyhmänOmaSivu";
+import UusiElokuvaRyhmään from "./pages/UusiElokuvaRyhmään";
 
 function App() {
   return (
@@ -34,6 +35,10 @@ function App() {
           <Route
             path="/uusiarvostelu/:mediaType/:movieId/:title"
             element={<UusiArvostelu />}
+          />
+          <Route
+            path="/Uusielokuvaryhmään/:mediaType/:movieId/:title"
+            element={<UusiElokuvaRyhmään />}
           />
           <Route element={<PrivateRoute />}>
             <Route path="/suosikit" element={<Suosikit />} />

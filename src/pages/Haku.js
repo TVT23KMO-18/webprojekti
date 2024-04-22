@@ -180,6 +180,12 @@ export default function Haku() {
             <button>Arvostele</button>
           </Link>
 
+          <Link
+            to={`/Uusielokuvaryhmään/${mediaType}/${movieId}/${name}`}
+            className="nav-link"
+          >
+            <button>Lisää Ryhmään</button>
+          </Link>
           <button
             onClick={() => {
               setTrigger(false);

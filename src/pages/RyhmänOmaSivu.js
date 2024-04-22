@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./RyhmänOmaSivu.css";
+import StarRating from "./StarRating";
 
 export default function RyhmänOmaSivu() {
   const [elokuvatSarjat, setElokuvatSarjat] = useState([]);
@@ -226,14 +227,44 @@ export default function RyhmänOmaSivu() {
       const events = [];
       for (let i = 0; i < eventsData.length; i++) {
         const eventid = eventsData[i].eventid;
+        const eventTheatre = eventsData[i].theatre;
+        const eventUrtlToShow = eventsData[i].urltoshow;
+        const eventStartingTime = eventsData[i].startingtime;
         const eventxmldata = await eventsxml(eventid);
+        const eventTitle = eventxmldata.title;
+        const eventImageUrl = eventxmldata.imageUrl;
+        console.log(eventStartingTime);
+        const eventRating = eventxmldata.rating;
+        const formattedDate = formatStartingTime(eventStartingTime);
 
-        events.push(eventxmldata);
+        events.push({
+          eventTitle,
+          formattedDate,
+          eventTheatre,
+          eventUrtlToShow,
+          eventImageUrl,
+          eventRating,
+        });
       }
       setNäytökset(events);
     } catch (error) {
       console.log("ei toimi");
     }
+  }
+  function formatStartingTime(startingTime) {
+    const date = new Date(startingTime);
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // January is 0
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+
+    // Add leading zeros if needed
+    const formattedMonth = month < 10 ? `0${month}` : month;
+    const formattedDay = day < 10 ? `0${day}` : day;
+    const formattedHours = hours < 10 ? `0${hours}` : hours;
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+    return `${formattedDay}.${formattedMonth} ${formattedHours}.${formattedMinutes}`;
   }
 
   async function eventsxml(eventid) {
@@ -253,7 +284,7 @@ export default function RyhmänOmaSivu() {
       const eventElement = xmlDoc.querySelector("Event");
 
       if (!eventElement) {
-        throw new Error("Event element not found in XML data");
+        throw new Error("Event element not found");
       }
 
       const titleElement = eventElement.querySelector("Title");
@@ -263,30 +294,18 @@ export default function RyhmänOmaSivu() {
       const rating = ratingElement ? ratingElement.textContent : null;
 
       const imageUrlElement = eventElement.querySelector(
-        "EventSmallImagePortrait"
+        "EventMediumImagePortrait"
       );
       const imageUrl = imageUrlElement ? imageUrlElement.textContent : null;
 
-      const theatreAuditoriumElement = eventElement.querySelector(
-        "TheatreAndAuditorium"
-      );
-      const theatreAuditorium = theatreAuditoriumElement
-        ? theatreAuditoriumElement.textContent
-        : null;
-
       const eventIdElement = eventElement.querySelector("ID");
-      const eventId = eventIdElement ? eventIdElement.textContent : null;
 
       const eventUrlElement = eventElement.querySelector("EventURL");
-      const eventUrl = eventUrlElement ? eventUrlElement.textContent : null;
 
       const eventData = {
         title,
         rating,
         imageUrl,
-        theatreAuditorium,
-        eventId,
-        eventUrl,
       };
 
       return eventData;
@@ -299,13 +318,11 @@ export default function RyhmänOmaSivu() {
   return (
     <>
       <h1>{groupname}</h1>
-      <p>{idgroup}</p>
       <div className="Ryhmänomansivuncontainer">
+        <h3>Elokuvat ja Sarjat</h3>
         <div className="ryhmällejaetutelokuvat">
           {elokuvatSarjat.map((sisältö, index) => (
             <div key={index} className="elokuvatdata">
-              <p>{sisältö.userName}</p>
-              <p>{sisältö.id}</p>
               <img
                 src={`https://image.tmdb.org/t/p/w200${sisältö.movieImage}`}
                 alt="kuvatossaja"
@@ -313,24 +330,31 @@ export default function RyhmänOmaSivu() {
             </div>
           ))}
         </div>
+        {/*<h3>Arvostelut</h3>*/}
+
         <div className="jaetutarvostelut">
-          <p>testings</p>
           {arvostelut.map((arvostelu, index) => (
             <div key={index} className="arvostelutdata">
               <img
                 src={`https://image.tmdb.org/t/p/w200${arvostelu.movieImage}`}
                 alt="kuvatossaja"
               />
+              <StarRating rating={arvostelu.arvosana} />
               <p>{arvostelu.title}</p>
               <p>{arvostelu.arvosteluTeksti}</p>
             </div>
           ))}
         </div>
+        <h3>Näytökset</h3>
         <div className="jaetutnäytökset">
-          <p>testings</p>
           {näytökset.map((näytös, index) => (
             <div key={index} className="arvostelutdata">
-              <p>{näytös.title}</p>
+              <img src={näytös.eventImageUrl} alt={näytös.eventTitle} />
+              <p>{näytös.eventTheatre}</p>
+              <p>{näytös.formattedDate}</p>
+              <a href={näytös.eventUrtlToShow}>
+                <button>Valitse näytös</button>
+              </a>
             </div>
           ))}
         </div>

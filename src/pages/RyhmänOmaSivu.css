@@ -1,9 +1,31 @@
 .Ryhmänomansivuncontainer {
-  display: flex;
+  display: block;
+  text-align: center;
 }
 .ryhmällejaetutelokuvat {
-  flex: 1;
+  display: flex;
 }
+.ryhmällejaetutelokuvat img {
+  height: 300px;
+  width: 200px;
+  margin: 10px;
+}
+
 .jaetutarvostelut {
-  flex: 1;
+  display: flex;
+}
+.jaetutarvostelut img {
+  height: 300px;
+  width: 200px;
+  margin: 10px;
+}
+
+.jaetutnäytökset {
+  display: flex;
+  margin-bottom: 100px;
+}
+.jaetutnäytökset img {
+  height: 300px;
+  width: 200px;
+  margin: 10px;
 }

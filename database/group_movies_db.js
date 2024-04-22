@@ -15,5 +15,15 @@ async function getMoviesById(idgroup) {
     throw error;
   }
 }
-
-module.exports = { getMoviesById };
+async function addGroupMovie(serieid, movieid, idgroup, iduser) {
+  try {
+    const query = `
+      INSERT INTO group_movies
+      (serieid,movieid,idgroup,iduser)VALUES ($1,$2,$3,$4)
+    `;
+    await pgPool.query(query, [serieid, movieid, idgroup, iduser]);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+module.exports = { getMoviesById, addGroupMovie };

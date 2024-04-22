@@ -89,3 +89,9 @@ CREATE TABLE group_event(
     idgroup INTEGER,
     FOREIGN KEY (idgroup) REFERENCES "group"(idgroup)
 );
+TRUNCATE TABLE group_reviews;
+
+ALTER TABLE group_event
+ADD COLUMN startingTime TIMESTAMP,
+ADD COLUMN urlToShow VARCHAR(255),
+ADD COLUMN theatre VARCHAR(100);

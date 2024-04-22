@@ -7,4 +7,32 @@ async function getGroupEventById(idgroup) {
   );
   return result.rows;
 }
-module.exports = { getGroupEventById };
+
+async function addGroupEvent(
+  eventid,
+  idgroup,
+  startingtime,
+  urltoshow,
+  theatre
+) {
+  try {
+    const query = `
+    INSERT INTO group_event
+    (eventid,
+      idgroup,
+      startingtime,
+      urltoshow,
+      theatre)VALUES ($1,$2,$3,$4,$5)
+  `;
+    await pgPool.query(query, [
+      eventid,
+      idgroup,
+      startingtime,
+      urltoshow,
+      theatre,
+    ]);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+module.exports = { getGroupEventById, addGroupEvent };

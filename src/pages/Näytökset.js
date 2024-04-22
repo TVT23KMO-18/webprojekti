@@ -1,11 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./Näytökset.css";
 import DateSelect from "../components/DateSelect";
+import Popup from "./Popup";
+import { UserContext } from "../context/UserContext";
+import axios from "axios";
 
 function Näytökset() {
+  const { userid, token } = useContext(UserContext);
   const [movies, setMovies] = useState([]);
   const [areaId, setAreaId] = useState("1018");
   const [selectedDate, setSelectedDate] = useState("");
+
+  const [triggerState, setTrigger] = useState(false);
+  const [theatre, setTheatre] = useState("");
+  const [startingTime, setStartingTime] = useState("");
+  const [urlToShow, setUrlToShow] = useState("");
+  const [eventId, setEventId] = useState("");
+
+  const [groups, setGroups] = useState([]);
+  const [selectedGroup, setSelectedGroup] = useState("");
+  const [idgroup, setIdgroup] = useState("");
 
   useEffect(() => {
     const parser = new DOMParser();
@@ -63,6 +77,7 @@ function Näytökset() {
             ShowURL,
             TheatreAuditorium,
             eventID,
+            showStart,
           });
         });
 
@@ -80,7 +95,72 @@ function Näytökset() {
   const handleDateSelect = (date) => {
     setSelectedDate(date);
   };
+  async function setGroupEvent() {
+    console.log(token);
 
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/groupevents",
+        {
+          eventid: eventId,
+          idgroup: idgroup,
+          startingtime: startingTime,
+          urltoshow: urlToShow,
+          theatre: theatre,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      window.alert("Näytös lisätty ryhmään");
+    } catch (error) {
+      window.alert(error);
+      console.error(error);
+    }
+  }
+  async function nameFromId(idUser) {
+    const url = `http://localhost:3001/user/oneuser?iduser=${idUser}`;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const dataArray = await response.json();
+
+      const userData = dataArray[0];
+
+      const username = userData.username;
+
+      return username;
+    } catch (error) {
+      console.error("Fetch error:", error);
+      throw error;
+    }
+  }
+  async function getGroups(userid) {
+    try {
+      const name = await nameFromId(userid);
+      const response = await axios.get(
+        `http://localhost:3001/group/groups?username=${name}`
+      );
+      const groupData = Object.values(response.data).map((group) => ({
+        idgroup: group.idgroup,
+        groupname: group.groupname,
+      }));
+      console.log(groupData);
+      setGroups(groupData);
+    } catch (error) {
+      console.error("Error fetching groups:", error);
+    }
+  }
+  function handleGroupChange(event) {
+    const selectedIdgroup = event.target.value;
+    setSelectedGroup(selectedIdgroup);
+    setIdgroup(selectedIdgroup);
+  }
   return (
     <div className="näytöksetcontainer">
       <div className="selectit">
@@ -145,7 +225,18 @@ function Näytökset() {
       {movies.map((movie, index) => (
         <div key={index} className="moviediv">
           <div className="kuva">
-            <img src={movie.imageUrl} alt="movieimge" />
+            <img
+              onClick={() => {
+                setTrigger(true);
+                setTheatre(movie.TheatreAuditorium);
+                setStartingTime(movie.showStart);
+                setUrlToShow(movie.ShowURL);
+                getGroups(userid);
+                setEventId(movie.eventID);
+              }}
+              src={movie.imageUrl}
+              alt="movieimge"
+            />
           </div>
           <div className="row">
             <div className="title">
@@ -169,6 +260,32 @@ function Näytökset() {
           </div>
         </div>
       ))}
+      <Popup className="lisätieto" trigger={triggerState}>
+        <h3>Jaa ryhmälle</h3>
+        <p>{theatre}</p>
+        <p>{startingTime}</p>
+        <p>{urlToShow}</p>
+        <p>{userid}</p>
+        <p>{eventId}</p>
+        <p>{idgroup}</p>
+        <div>
+          <label htmlFor="groupSelect">Select a group:</label>
+          <select
+            id="groupSelect"
+            value={selectedGroup}
+            onChange={handleGroupChange}
+          >
+            <option value="">Select...</option>
+            {groups.map((group) => (
+              <option key={group.idgroup} value={group.idgroup}>
+                {group.groupname}
+              </option>
+            ))}
+          </select>
+        </div>
+        <button onClick={setGroupEvent}>Lähetä näytös</button>
+        <button onClick={() => setTrigger(false)}>Sulje</button>
+      </Popup>
     </div>
   );
 }

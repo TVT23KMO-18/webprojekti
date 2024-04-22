@@ -25,11 +25,10 @@ router.post('/adduser', async (req, res) => {
     res.end();
 })
 
-router.post('/deleteuser', async (req, res) => {
+router.delete('/deleteuser', async (req, res) => {
     try {
         await deleteUser(req.query.username);
         res.status(200).json({ success: true, message: 'Käyttäjä poistettu' })
-        res.end();
     } catch (error) {
         if (error.message === 'User not found') {
             res.status(404).json({ success: false, message: 'Käyttäjää ei löydy' });

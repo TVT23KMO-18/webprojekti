@@ -11,6 +11,17 @@ async function getAllFavorites() {
     }
   }
 
+  async function getFavoritesByUser(userId) {
+    const queryText = 'SELECT * FROM favorites WHERE iduser = $1';
+    try {
+      const { rows } = await pgPool.query(queryText, [userId]);
+      return rows;
+    } catch (error) {
+      console.error('Error getting favorites by user:', error);
+      throw error;
+    }
+  }
+
   async function createFavorite({ iduser, movieid, serieid, shareable_link }) {
     try {
       if (movieid === "") {
@@ -71,6 +82,7 @@ async function getAllFavorites() {
   
   module.exports = {
     getAllFavorites,
+    getFavoritesByUser,
     createFavorite,
     getFavoriteById,
     updateFavorite,

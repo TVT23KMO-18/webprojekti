@@ -1,25 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Suosikit.css";
+import { UserContext } from "../context/UserContext";
 
 export default function Favorites() {
   const [favorites, setFavorites] = useState([]);
+  const { userid } = useContext(UserContext);
 
   useEffect(() => {
     async function fetchFavorites() {
       try {
-        const response = await fetch("http://localhost:3001/favorites");
+        const userId = userid;
+        const response = await fetch(`http://localhost:3001/favorites/user/${userId}`);
         const data = await response.json();
         const favoritesData = [];
-        
+
         for (let i = 0; i < data.length; i++) {
           const favorite = data[i];
-          const { iduser, movieid, serieid } = favorite;
+          const { movieid, serieid } = favorite;
           let title = "";
           let movieImage = "";
           let overview = "";
           let studioName = "";
           let type = "";
-          
+
           if (movieid != null) {
             const movieData = await movieDataFromId(movieid);
             title = movieData.title;
@@ -37,7 +40,6 @@ export default function Favorites() {
           }
 
           favoritesData.push({
-            iduser,
             title,
             movieImage,
             overview,
@@ -45,7 +47,7 @@ export default function Favorites() {
             type,
           });
         }
-        
+
         setFavorites(favoritesData);
       } catch (error) {
         console.error("Error fetching favorites:", error);
@@ -53,7 +55,7 @@ export default function Favorites() {
     }
 
     fetchFavorites();
-  }, []);
+  }, [userid]);
 
   async function movieDataFromId(movieId) {
     const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`;

@@ -21,6 +21,17 @@ router.get('/', async (req, res) => {
       res.status(404).json({ success: false, message: 'Favorite not found' });
     }
   });
+
+  router.get('/user/:userId', async (req, res) => {
+    const userId = req.params.userId;
+    try {
+      const userFavorites = await favorites.getFavoritesByUser(userId);
+      res.json(userFavorites);
+    } catch (error) {
+      console.error('Error getting favorites by user:', error);
+      res.status(500).json({ success: false, message: 'Error getting favorites by user' });
+    }
+  });
   
   router.post('/addfavorite', async (req, res) => {
     const { iduser, movieid, serieid, shareable_link } = req.body;

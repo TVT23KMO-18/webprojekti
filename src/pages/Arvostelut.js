@@ -33,7 +33,6 @@ export default function Arvostelut() {
             movieImage = movieData.movieImage;
             overview = movieData.overview;
             studioName = movieData.studioName;
-            console.log(studioName);
             type = "Elokuva";
           } else {
             const serieId = arvostelu.serieid;
@@ -127,7 +126,6 @@ export default function Arvostelut() {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      console.log(data);
       const title = data.original_name;
       const movieImage = data.poster_path;
       const overview = data.overview;

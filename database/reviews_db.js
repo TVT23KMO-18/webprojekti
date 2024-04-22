@@ -21,4 +21,8 @@ async function getReviews() {
   return result.rows;
 }
 
-module.exports = { addReview, getReviews };
+async function deleteReview(id) {
+  await pgPool.query('DELETE FROM reviews WHERE idreviews=$1', [id])
+}
+
+module.exports = { addReview, getReviews, deleteReview };

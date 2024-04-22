@@ -8,6 +8,7 @@ export default function Arvostelut() {
   const [name, setName] = useState("");
   const [overview, setOverview] = useState("");
   const [studioName, setStudioName] = useState("");
+  
   useEffect(() => {
     async function getRewieves() {
       try {

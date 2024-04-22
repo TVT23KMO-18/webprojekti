@@ -16,6 +16,8 @@ import OmaSivu from "./pages/OmaSivu";
 import UusiArvostelu from "./pages/UusiArvostelu";
 import UserProvider from "./context/UserProvider";
 import PrivateRoute from "./pages/PrivateRoute";
+import RyhmänOmaSivu from "./pages/RyhmänOmaSivu";
+import UusiElokuvaRyhmään from "./pages/UusiElokuvaRyhmään";
 
 function App() {
   return (
@@ -27,8 +29,16 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
           <Route
+            path="/ryhmanomasivu/:idgroup/:groupname"
+            element={<RyhmänOmaSivu />}
+          />
+          <Route
             path="/uusiarvostelu/:mediaType/:movieId/:title"
             element={<UusiArvostelu />}
+          />
+          <Route
+            path="/Uusielokuvaryhmään/:mediaType/:movieId/:title"
+            element={<UusiElokuvaRyhmään />}
           />
           <Route element={<PrivateRoute />}>
             <Route path="/suosikit" element={<Suosikit />} />

@@ -161,6 +161,7 @@ ALTER SEQUENCE public.users_iduser_seq OWNER TO postgres;
 ALTER SEQUENCE public.users_iduser_seq OWNED BY public.users.iduser;
 
 
+
 --
 -- Name: group idgroup; Type: DEFAULT; Schema: public; Owner: postgres
 --
@@ -264,3 +265,35 @@ ALTER TABLE ONLY public.reviews
 --
 -- PostgreSQL database dump complete
 --
+
+TRUNCATE TABLE reviews;
+
+CREATE TABLE group_movies (
+    idgroup_movies SERIAL PRIMARY KEY,
+    serieid INT,
+    movieid INT,
+    idgroup INT,
+    iduser INT,
+    FOREIGN KEY (iduser) REFERENCES users(iduser) ON DELETE CASCADE,
+    FOREIGN KEY (idgroup) REFERENCES "group"(idgroup) ON DELETE CASCADE
+);
+
+CREATE TABLE group_reviews (
+    idgroup_reviews SERIAL PRIMARY KEY,
+    idgroup INT,
+    idreviews INT,
+    FOREIGN KEY (idgroup) REFERENCES "group"(idgroup),
+    FOREIGN KEY (idreviews) REFERENCES reviews(idreviews)
+);
+CREATE TABLE group_event(
+    idshow SERIAL PRIMARY KEY,
+    eventid INTEGER NOT NULL,
+    idgroup INTEGER,
+    FOREIGN KEY (idgroup) REFERENCES "group"(idgroup)
+);
+TRUNCATE TABLE group_reviews;
+
+ALTER TABLE group_event
+ADD COLUMN startingTime TIMESTAMP,
+ADD COLUMN urlToShow VARCHAR(255),
+ADD COLUMN theatre VARCHAR(100);

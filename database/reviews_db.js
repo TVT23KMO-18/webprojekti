@@ -4,6 +4,7 @@ const sql = {
   ADD_REVIEW:
     "INSERT INTO reviews (iduser, review_text, review_num, movieid, serieid) VALUES ($1,$2,$3,$4,$5)",
   GET_ALL_REVIEWS: "SELECT * FROM reviews",
+  GET_REVIEWS_BY_ID: "SELECT * FROM reviews Where idreviews = $1",
 };
 
 async function addReview(iduser, review, num, movieid, serieid) {
@@ -21,8 +22,14 @@ async function getReviews() {
   return result.rows;
 }
 
-async function deleteReview(id) {
-  await pgPool.query('DELETE FROM reviews WHERE idreviews=$1', [id])
+async function getReviewsByID(idreviews) {
+  let result = await pgPool.query(sql.GET_REVIEWS_BY_ID, [idreviews]);
+
+  return result.rows;
 }
 
-module.exports = { addReview, getReviews, deleteReview };
+async function deleteReview(id) {
+  await pgPool.query("DELETE FROM reviews WHERE idreviews=$1", [id]);
+}
+
+module.exports = { addReview, getReviews, deleteReview, getReviewsByID };

@@ -19,7 +19,7 @@ export default function Haku() {
   const [PopupPosterPath, setPopupPosterPath] = useState("");
   const [movieId, setMovieId] = useState("");
   const [name, setName] = useState("");
-  const { userid} = useContext(UserContext);
+  const { userid } = useContext(UserContext);
 
   const getMedia = async () => {
     try {
@@ -119,14 +119,14 @@ export default function Haku() {
       } else {
         serieid = movieId;
       }
-  
+
       const response = await axios.post(
         "http://localhost:3001/favorites/addfavorite",
         {
           iduser: userid,
           movieid: movieid,
           serieid: serieid,
-          shareable_link: null, 
+          shareable_link: null,
         },
         {
           headers: {
@@ -134,10 +134,9 @@ export default function Haku() {
           },
         }
       );
-  
+
       alert("Media lisätty suosikkeihin onnistuneesti!");
     } catch (error) {
-
       console.error("Error adding media to favorites:", error);
       alert("Suosikkeihin lisääminen epäonnistui. Yritä myöhemmin uudestaan.");
     }
@@ -206,7 +205,10 @@ export default function Haku() {
           alt="Poster"
         />
         <div className="napit">
-          <button onClick={() => addToFavorites(movieId, mediaType)}>Lisää suosikkeihin</button>
+          <button>Lisää suosikkeihin</button>
+          <button onClick={() => addToFavorites(movieId, mediaType)}>
+            Lisää suosikkeihin
+          </button>
 
           <Link
             to={`/uusiarvostelu/${mediaType}/${movieId}/${name}`}
@@ -215,6 +217,12 @@ export default function Haku() {
             <button>Arvostele</button>
           </Link>
 
+          <Link
+            to={`/Uusielokuvaryhmään/${mediaType}/${movieId}/${name}`}
+            className="nav-link"
+          >
+            <button>Lisää Ryhmään</button>
+          </Link>
           <button
             onClick={() => {
               setTrigger(false);

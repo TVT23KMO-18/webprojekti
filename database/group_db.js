@@ -16,6 +16,18 @@ async function getGroups(username) {
   return result.rows;
 }
 
+async function getUsersFromGroup(idgroup) {
+  let usernames = [];
+  let result = await pgPool.query('SELECT iduser FROM group_membership WHERE idgroup=$1', [idgroup]);
+  const idUsers = result.rows;
+  for(user of idUsers) {
+    console.log(user.iduser)
+    let queryResult = await pgPool.query('SELECT username FROM users WHERE iduser=$1', [user.iduser])
+    usernames.push(queryResult.rows[0].username)
+  }
+  return usernames;
+}
+
 async function allGroups() {
   let result = await pgPool.query(
     'SELECT idgroup, groupname, description FROM "group"'
@@ -65,4 +77,5 @@ module.exports = {
   allGroups,
   allUsernameGroups,
   deleteGroup,
+  getUsersFromGroup
 };

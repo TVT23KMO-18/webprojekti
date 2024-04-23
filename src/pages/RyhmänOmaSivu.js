@@ -8,8 +8,25 @@ export default function RyhmänOmaSivu() {
   const { idgroup, groupname } = useParams();
   const [arvostelut, setArvostelut] = useState([]);
   const [näytökset, setNäytökset] = useState([]);
+  const [jäsenet, setJäsenet] = useState([]);
 
   useEffect(() => {
+    async function getUsersFromGroup() {
+      try {
+        const url = `http://localhost:3001/group/users/${idgroup}`;
+        const data = await fetch(url);
+        const usersData = await data.json();
+        setJäsenet(usersData)
+        console.log(jäsenet)
+      } catch (error) {
+        console.log('ei')
+      }
+    }
+    getUsersFromGroup();
+  }, []);
+
+  useEffect(() => {
+    console.log(idgroup)
     async function fetchData(idgroup) {
       try {
         const url = `http://localhost:3001/groupmovies/movies/${idgroup}`;
@@ -315,6 +332,10 @@ export default function RyhmänOmaSivu() {
     }
   }
 
+  useEffect(() => {
+    console.log(jäsenet);
+  }, [jäsenet]);
+
   return (
     <>
       <h1>{groupname}</h1>
@@ -356,6 +377,11 @@ export default function RyhmänOmaSivu() {
                 <button>Valitse näytös</button>
               </a>
             </div>
+          ))}
+        </div>
+        <div className="ryhmä-sivun-jäsenet">
+          {jäsenet.map((jäsen, index) => (
+            <p key={index}>{jäsen}</p>
           ))}
         </div>
       </div>

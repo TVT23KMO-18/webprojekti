@@ -4,9 +4,20 @@ const {
   allGroups,
   allUsernameGroups,
   deleteGroup,
+  getUsersFromGroup
 } = require("../database/group_db");
 
 const router = require("../server/node_modules/express").Router();
+
+router.get("/users/:idgroup", async (req, res) => {
+  try {
+    console.log('meni')
+    const users = await getUsersFromGroup(req.params.idgroup);
+    res.json(users);
+  } catch(error) {
+    res.status(500).json({ success: false, message: "Virhe käyttäjien hakemisessa" });
+  }
+});
 
 router.get("/groups", async (req, res) => {
   try {

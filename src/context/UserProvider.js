@@ -37,7 +37,7 @@ export default function UserProvider({ children }) {
   };
 
   const remove = async (username) => {
-    axios.post(`http://localhost:3001/user/deleteuser?username=${username}`);
+    axios.delete(`http://localhost:3001/user/deleteuser?username=${username}`);
     setUser(null);
     alert("Käyttäjä poistettu.");
     navigate("/");

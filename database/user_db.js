@@ -35,7 +35,7 @@ async function deleteUser(username) {
             throw new Error('User not found');
         }
         const idUser = result.rows[0].iduser;
-        await pgPool.query('DELETE FROM favourites WHERE iduser=$1', [idUser]);
+        await pgPool.query('DELETE FROM favorites WHERE iduser=$1', [idUser]);
         const groupMembershipResult = await pgPool.query('SELECT idgroup FROM group_membership WHERE iduser=$1', [idUser]);
         const idGroups = groupMembershipResult.rows.map(row => row.idgroup);
         await pgPool.query('DELETE FROM group_membership WHERE iduser=$1', [idUser]);

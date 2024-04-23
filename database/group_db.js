@@ -28,6 +28,11 @@ async function getUsersFromGroup(idgroup) {
   return usernames;
 }
 
+async function getOwner(idgroup) {
+  let result = await pgPool.query('SELECT owner FROM "group" WHERE idgroup=$1', [idgroup])
+  return result.rows[0].owner
+}
+
 async function allGroups() {
   let result = await pgPool.query(
     'SELECT idgroup, groupname, description FROM "group"'
@@ -71,11 +76,20 @@ async function deleteGroup(id) {
   await pgPool.query('DELETE FROM "group" WHERE idgroup=$1', [id]);
 }
 
+async function deleteUser(username, idgroup) {
+  let result = await pgPool.query('SELECT iduser FROM users WHERE username=$1', [username]);
+  let user = result.rows[0].iduser;
+  await pgPool.query('DELETE FROM group_membership WHERE idgroup=$1 AND iduser=$2', [idgroup, user])
+  // TEE NIIN ETTÄ SE POISTAA VAIN TIETYSTÄ RYHMÄSTÄ SEN KÄYTTÄJÄN, NYT SE POISTAA JOKAISESTA
+}
+
 module.exports = {
   getGroups,
   createGroup,
   allGroups,
   allUsernameGroups,
   deleteGroup,
-  getUsersFromGroup
+  getUsersFromGroup,
+  getOwner,
+  deleteUser
 };

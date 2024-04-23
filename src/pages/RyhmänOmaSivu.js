@@ -1,15 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { json, useParams } from "react-router-dom";
 import "./RyhmänOmaSivu.css";
 import StarRating from "./StarRating";
+import { UserContext } from "../context/UserContext";
+import axios from "axios";
 
 export default function RyhmänOmaSivu() {
+  const { user } = useContext(UserContext);
   const [elokuvatSarjat, setElokuvatSarjat] = useState([]);
   const { idgroup, groupname } = useParams();
   const [arvostelut, setArvostelut] = useState([]);
   const [näytökset, setNäytökset] = useState([]);
   const [jäsenet, setJäsenet] = useState([]);
+  const [owner, setOwner] = useState('');
 
+  useEffect(() => {
+    async function getOwnerFromGroup() {
+      try {
+        const url = `http://localhost:3001/group/groupowner/${idgroup}`;
+        const data = await fetch(url);
+        const ownerData = await data.json();
+        setOwner(ownerData);
+      } catch (error) {
+        console.log('ei')
+      }
+    }
+    getOwnerFromGroup();
+  }, []);
+
+  useEffect(() => {
+    console.log(owner);
+  }, [owner]);
+  
   useEffect(() => {
     async function getUsersFromGroup() {
       try {
@@ -332,6 +354,30 @@ export default function RyhmänOmaSivu() {
     }
   }
 
+  const deleteMember = async (jäsen, idgroup) => {
+      if (jäsen != owner) {
+        const data = {
+          username: jäsen,
+          idgroup: idgroup
+        };
+        const jsonData = JSON.stringify(data);
+        const options = {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+        try {
+          console.log(jsonData)
+          /*axios.delete("http://localhost:3001/group/deletebyusername", jsonData, options)*/
+          axios.delete("http://localhost:3001/group/deletebyusername", { data: jsonData, ...options })
+        } catch(error) {
+          console.log('Error')
+        }
+      } else {
+        alert('Omistaja ei voi poistaa itseään')
+      }
+  };
+
   useEffect(() => {
     console.log(jäsenet);
   }, [jäsenet]);
@@ -380,9 +426,15 @@ export default function RyhmänOmaSivu() {
           ))}
         </div>
         <div className="ryhmä-sivun-jäsenet">
-          {jäsenet.map((jäsen, index) => (
-            <p key={index}>{jäsen}</p>
-          ))}
+          <h4>Ryhmän Jäsenet</h4>
+            {jäsenet.map((jäsen, index) => (
+              <div className="ryhmän-jäsenet" key={index}>
+                <p>{jäsen}</p>
+                {user.username === owner && (
+                  <button onClick={() => deleteMember(jäsen, idgroup)}>Poista käyttäjä ryhmästä</button>
+                )}
+              </div>
+            ))}
         </div>
       </div>
     </>

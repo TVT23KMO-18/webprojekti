@@ -205,7 +205,6 @@ export default function Haku() {
           alt="Poster"
         />
         <div className="napit">
-          <button>Lisää suosikkeihin</button>
           <button onClick={() => addToFavorites(movieId, mediaType)}>
             Lisää suosikkeihin
           </button>

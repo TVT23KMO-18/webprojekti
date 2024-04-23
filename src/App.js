@@ -44,12 +44,13 @@ function App() {
             <Route path="/suosikit" element={<Suosikit />} />
             <Route path="/omasivu" exact element={<OmaSivu />} />
           </Route>
+          <Route path="/suosikit/:userid" element={<Suosikit />} />
           <Route path="/ryhmät" element={<Ryhmät />} />
           <Route path="/arvostelut" exact element={<Arvostelut />} />
           <Route path="/näytökset" exact element={<Näytökset />} />
           <Route path="/haku" exact element={<Haku />} />
           <Route path="/register" exact element={<Register />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} /> 
         </Routes>
       </div>
       <Footer></Footer>

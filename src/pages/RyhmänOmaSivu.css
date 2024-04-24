@@ -1,9 +1,18 @@
+.ryhmäbody h3 {
+  font-size: 40px;
+  padding-top: 20px;
+}
+
 .Ryhmänomansivuncontainer {
   display: block;
   text-align: center;
+  justify-content: center;
 }
 .ryhmällejaetutelokuvat {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: auto;
 }
 .ryhmällejaetutelokuvat img {
   height: 300px;
@@ -13,6 +22,9 @@
 
 .jaetutarvostelut {
   display: flex;
+
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 .jaetutarvostelut img {
   height: 300px;
@@ -23,13 +35,26 @@
 .jaetutnäytökset {
   display: flex;
   margin-bottom: 100px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 .jaetutnäytökset img {
   height: 300px;
   width: 200px;
   margin: 10px;
 }
+.arvostelutdata {
+  width: 230px;
+  border-style: solid;
+  margin: 10px;
+  padding-bottom: 10px;
+}
 
+.elokuvatdata {
+  width: 230px;
+  border-style: solid;
+  margin: 10px;
+}
 .ryhmän-jäsenet > div {
   display: inline-block;
 }

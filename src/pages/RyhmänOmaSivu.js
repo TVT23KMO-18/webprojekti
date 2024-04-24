@@ -12,7 +12,7 @@ export default function RyhmänOmaSivu() {
   const [arvostelut, setArvostelut] = useState([]);
   const [näytökset, setNäytökset] = useState([]);
   const [jäsenet, setJäsenet] = useState([]);
-  const [owner, setOwner] = useState('');
+  const [owner, setOwner] = useState("");
 
   useEffect(() => {
     async function getOwnerFromGroup() {
@@ -22,7 +22,7 @@ export default function RyhmänOmaSivu() {
         const ownerData = await data.json();
         setOwner(ownerData);
       } catch (error) {
-        console.log('ei')
+        console.log("ei");
       }
     }
     getOwnerFromGroup();
@@ -31,24 +31,24 @@ export default function RyhmänOmaSivu() {
   useEffect(() => {
     console.log(owner);
   }, [owner]);
-  
+
   useEffect(() => {
     async function getUsersFromGroup() {
       try {
         const url = `http://localhost:3001/group/users/${idgroup}`;
         const data = await fetch(url);
         const usersData = await data.json();
-        setJäsenet(usersData)
-        console.log(jäsenet)
+        setJäsenet(usersData);
+        console.log(jäsenet);
       } catch (error) {
-        console.log('ei')
+        console.log("ei");
       }
     }
     getUsersFromGroup();
   }, []);
 
   useEffect(() => {
-    console.log(idgroup)
+    console.log(idgroup);
     async function fetchData(idgroup) {
       try {
         const url = `http://localhost:3001/groupmovies/movies/${idgroup}`;
@@ -262,29 +262,53 @@ export default function RyhmänOmaSivu() {
       const url = `http://localhost:3001/groupevents/${idgroup}`;
       const data = await fetch(url);
       const eventsData = await data.json();
-      console.log(eventsData);
+      // console.log(eventsData);
+      const currentDate = new Date();
+      const year = currentDate.getFullYear();
+      const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+      const day = String(currentDate.getDate()).padStart(2, "0");
+      const hour = String(currentDate.getHours()).padStart(2, "0");
+      const minute = String(currentDate.getMinutes()).padStart(2, "0");
+      const second = String(currentDate.getSeconds()).padStart(2, "0");
+
+      const currentTime = `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+      //console.log(currentTime);
       const events = [];
       for (let i = 0; i < eventsData.length; i++) {
         const eventid = eventsData[i].eventid;
-        const eventTheatre = eventsData[i].theatre;
-        const eventUrtlToShow = eventsData[i].urltoshow;
-        const eventStartingTime = eventsData[i].startingtime;
-        const eventxmldata = await eventsxml(eventid);
-        const eventTitle = eventxmldata.title;
-        const eventImageUrl = eventxmldata.imageUrl;
-        console.log(eventStartingTime);
-        const eventRating = eventxmldata.rating;
-        const formattedDate = formatStartingTime(eventStartingTime);
 
-        events.push({
-          eventTitle,
-          formattedDate,
-          eventTheatre,
-          eventUrtlToShow,
-          eventImageUrl,
-          eventRating,
-        });
+        const eventStartingTime = eventsData[i].startingtime;
+        if (eventStartingTime < currentTime) {
+          console.log("menny jo tossaja");
+          try {
+            await fetch(`http://localhost:3001/groupevents/${eventid}`, {
+              method: "DELETE",
+            });
+            console.log("Event deleted:", eventid);
+          } catch (error) {
+            console.error("Error deleting event:", eventid, error);
+          }
+        } else {
+          const eventTheatre = eventsData[i].theatre;
+          const eventUrtlToShow = eventsData[i].urltoshow;
+          const eventxmldata = await eventsxml(eventid);
+          const eventTitle = eventxmldata.title;
+          const eventImageUrl = eventxmldata.imageUrl;
+          // console.log(eventStartingTime);
+          const eventRating = eventxmldata.rating;
+          const formattedDate = formatStartingTime(eventStartingTime);
+
+          events.push({
+            eventTitle,
+            formattedDate,
+            eventTheatre,
+            eventUrtlToShow,
+            eventImageUrl,
+            eventRating,
+          });
+        }
       }
+
       setNäytökset(events);
     } catch (error) {
       console.log("ei toimi");
@@ -355,27 +379,30 @@ export default function RyhmänOmaSivu() {
   }
 
   const deleteMember = async (jäsen, idgroup) => {
-      if (jäsen != owner) {
-        const data = {
-          username: jäsen,
-          idgroup: idgroup
-        };
-        const jsonData = JSON.stringify(data);
-        const options = {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-        try {
-          console.log(jsonData)
-          /*axios.delete("http://localhost:3001/group/deletebyusername", jsonData, options)*/
-          axios.delete("http://localhost:3001/group/deletebyusername", { data: jsonData, ...options })
-        } catch(error) {
-          console.log('Error')
-        }
-      } else {
-        alert('Omistaja ei voi poistaa itseään')
+    if (jäsen != owner) {
+      const data = {
+        username: jäsen,
+        idgroup: idgroup,
+      };
+      const jsonData = JSON.stringify(data);
+      const options = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      try {
+        console.log(jsonData);
+        /*axios.delete("http://localhost:3001/group/deletebyusername", jsonData, options)*/
+        axios.delete("http://localhost:3001/group/deletebyusername", {
+          data: jsonData,
+          ...options,
+        });
+      } catch (error) {
+        console.log("Error");
       }
+    } else {
+      alert("Omistaja ei voi poistaa itseään");
+    }
   };
 
   useEffect(() => {
@@ -383,7 +410,7 @@ export default function RyhmänOmaSivu() {
   }, [jäsenet]);
 
   return (
-    <>
+    <div className="ryhmäbody">
       <h1>{groupname}</h1>
       <div className="Ryhmänomansivuncontainer">
         <h3>Elokuvat ja Sarjat</h3>
@@ -397,7 +424,7 @@ export default function RyhmänOmaSivu() {
             </div>
           ))}
         </div>
-        {/*<h3>Arvostelut</h3>*/}
+        <h3>Arvostelut</h3>
 
         <div className="jaetutarvostelut">
           {arvostelut.map((arvostelu, index) => (
@@ -408,7 +435,9 @@ export default function RyhmänOmaSivu() {
               />
               <StarRating rating={arvostelu.arvosana} />
               <p>{arvostelu.title}</p>
-              <p>{arvostelu.arvosteluTeksti}</p>
+              <div className="arvostelutteksti">
+                <p>{arvostelu.arvosteluTeksti}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -427,16 +456,18 @@ export default function RyhmänOmaSivu() {
         </div>
         <div className="ryhmä-sivun-jäsenet">
           <h4>Ryhmän Jäsenet</h4>
-            {jäsenet.map((jäsen, index) => (
-              <div className="ryhmän-jäsenet" key={index}>
-                <p>{jäsen}</p>
-                {user.username === owner && (
-                  <button onClick={() => deleteMember(jäsen, idgroup)}>Poista käyttäjä ryhmästä</button>
-                )}
-              </div>
-            ))}
+          {jäsenet.map((jäsen, index) => (
+            <div className="ryhmän-jäsenet" key={index}>
+              <p>{jäsen}</p>
+              {user.username === owner && (
+                <button onClick={() => deleteMember(jäsen, idgroup)}>
+                  Poista käyttäjä ryhmästä
+                </button>
+              )}
+            </div>
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }

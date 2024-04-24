@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./Arvostelut.css";
 import Popup from "./Popup";
 import StarRating from "./StarRating";
+import { Link } from "react-router-dom";
 export default function Arvostelut() {
   const [arvostelut, setArvostelut] = useState([]);
   const [triggerState, setTrigger] = useState(false);
   const [name, setName] = useState("");
   const [overview, setOverview] = useState("");
   const [studioName, setStudioName] = useState("");
-  
+
   useEffect(() => {
     async function getRewieves() {
       try {
@@ -19,7 +20,8 @@ export default function Arvostelut() {
           const arvostelu = arvostelut[i];
           const idUser = arvostelu.iduser;
           const name = await nameFromId(idUser);
-
+          const arvosteluid = arvostelu.idreviews;
+          console.log(arvosteluid);
           const arvosteluTeksti = arvostelu.review_text;
           const arvosana = arvostelu.review_num;
           const movieId = arvostelu.movieid;
@@ -56,6 +58,7 @@ export default function Arvostelut() {
             overview,
             studioName,
             type,
+            arvosteluid,
           });
         }
         setArvostelut(ArvostelutData);
@@ -167,6 +170,12 @@ export default function Arvostelut() {
             </div>
           </div>
           <div className="nappi">
+            <Link
+              to={`/uusiarvosteluryhmään/${arvostelu.arvosteluid}`}
+              className="nav-link"
+            >
+              <button>Lisää Ryhmään</button>
+            </Link>
             <button
               onClick={() => {
                 setTrigger(true);

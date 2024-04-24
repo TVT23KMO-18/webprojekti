@@ -4,9 +4,31 @@ const {
   allGroups,
   allUsernameGroups,
   deleteGroup,
+  getUsersFromGroup,
+  getOwner,
+  deleteUser
 } = require("../database/group_db");
 
 const router = require("../server/node_modules/express").Router();
+
+router.get("/users/:idgroup", async (req, res) => {
+  try {
+    const users = await getUsersFromGroup(req.params.idgroup);
+    res.json(users);
+  } catch(error) {
+    res.status(500).json({ success: false, message: "Virhe käyttäjien hakemisessa" });
+  }
+});
+
+router.get("/groupowner/:idgroup", async (req, res) => {
+  console.log('joo')
+  try {
+    const owner = await getOwner(req.params.idgroup);
+    res.json(owner);
+  } catch(error) {
+    res.status(500).json({ success: false, message: "Virhe ryhmän omistajan hakemisessa" });
+  }
+})
 
 router.get("/groups", async (req, res) => {
   try {
@@ -64,5 +86,17 @@ router.delete("/", async (req, res) => {
     res.status(500).json({ error: "Internal server error." });
   }
 });
+
+router.delete("/deletebyusername", async (req, res) => {
+  // TEE NIIN ETTÄ SE POISTAA VAIN TIETYSTÄ RYHMÄSTÄ SEN KÄYTTÄJÄN, NYT SE POISTAA JOKAISESTA
+  try {
+    console.log(req.body.username, req.body.idgroup)
+    deleteUser(req.body.username, req.body.idgroup);
+    res.end();
+  } catch(error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal server error." });
+  }
+})
 
 module.exports = router;

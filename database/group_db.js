@@ -16,6 +16,23 @@ async function getGroups(username) {
   return result.rows;
 }
 
+async function getUsersFromGroup(idgroup) {
+  let usernames = [];
+  let result = await pgPool.query('SELECT iduser FROM group_membership WHERE idgroup=$1', [idgroup]);
+  const idUsers = result.rows;
+  for(user of idUsers) {
+    console.log(user.iduser)
+    let queryResult = await pgPool.query('SELECT username FROM users WHERE iduser=$1', [user.iduser])
+    usernames.push(queryResult.rows[0].username)
+  }
+  return usernames;
+}
+
+async function getOwner(idgroup) {
+  let result = await pgPool.query('SELECT owner FROM "group" WHERE idgroup=$1', [idgroup])
+  return result.rows[0].owner
+}
+
 async function allGroups() {
   let result = await pgPool.query(
     'SELECT idgroup, groupname, description FROM "group"'
@@ -59,10 +76,20 @@ async function deleteGroup(id) {
   await pgPool.query('DELETE FROM "group" WHERE idgroup=$1', [id]);
 }
 
+async function deleteUser(username, idgroup) {
+  let result = await pgPool.query('SELECT iduser FROM users WHERE username=$1', [username]);
+  let user = result.rows[0].iduser;
+  await pgPool.query('DELETE FROM group_membership WHERE idgroup=$1 AND iduser=$2', [idgroup, user])
+  // TEE NIIN ETTÄ SE POISTAA VAIN TIETYSTÄ RYHMÄSTÄ SEN KÄYTTÄJÄN, NYT SE POISTAA JOKAISESTA
+}
+
 module.exports = {
   getGroups,
   createGroup,
   allGroups,
   allUsernameGroups,
   deleteGroup,
+  getUsersFromGroup,
+  getOwner,
+  deleteUser
 };

@@ -15,4 +15,20 @@ async function getGroupReviewsById(idgroup) {
     throw error;
   }
 }
-module.exports = { getGroupReviewsById };
+
+async function addGroupReviews(idreviews, idgroup) {
+  try {
+    const query = `
+    INSERT INTO group_reviews
+    (idreviews,idgroup)VALUES ($1,$2)
+  `;
+    await pgPool.query(query, [idreviews, idgroup]);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+module.exports = {
+  getGroupReviewsById,
+  addGroupReviews,
+};

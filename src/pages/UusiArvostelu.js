@@ -50,7 +50,7 @@ export default function UusiArvostelu() {
         }
       );
       window.alert("Arvostelu lisätty");
-      navigate("/arvostelut")
+      navigate("/arvostelut");
     } catch (error) {
       window.alert("Valitse arvosana");
       console.error(error);

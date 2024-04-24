@@ -225,18 +225,7 @@ function Näytökset() {
       {movies.map((movie, index) => (
         <div key={index} className="moviediv">
           <div className="kuva">
-            <img
-              onClick={() => {
-                setTrigger(true);
-                setTheatre(movie.TheatreAuditorium);
-                setStartingTime(movie.showStart);
-                setUrlToShow(movie.ShowURL);
-                getGroups(userid);
-                setEventId(movie.eventID);
-              }}
-              src={movie.imageUrl}
-              alt="movieimge"
-            />
+            <img src={movie.imageUrl} alt="movieimge" />
           </div>
           <div className="row">
             <div className="title">
@@ -254,6 +243,18 @@ function Näytökset() {
             </div>
           </div>
           <div className="nappi">
+            <button
+              onClick={() => {
+                setTrigger(true);
+                setTheatre(movie.TheatreAuditorium);
+                setStartingTime(movie.showStart);
+                setUrlToShow(movie.ShowURL);
+                getGroups(userid);
+                setEventId(movie.eventID);
+              }}
+            >
+              Jaa näytös
+            </button>
             <a href={movie.ShowURL}>
               <button>Valitse näytös</button>
             </a>
@@ -262,12 +263,7 @@ function Näytökset() {
       ))}
       <Popup className="lisätieto" trigger={triggerState}>
         <h3>Jaa ryhmälle</h3>
-        <p>{theatre}</p>
-        <p>{startingTime}</p>
-        <p>{urlToShow}</p>
-        <p>{userid}</p>
-        <p>{eventId}</p>
-        <p>{idgroup}</p>
+
         <div>
           <label htmlFor="groupSelect">Select a group:</label>
           <select

@@ -35,4 +35,19 @@ async function addGroupEvent(
     throw new Error(error.message);
   }
 }
-module.exports = { getGroupEventById, addGroupEvent };
+async function deleteGroupReviewsByEventId(eventid) {
+  try {
+    const query = `
+      DELETE FROM group_event
+      WHERE eventid = $1
+    `;
+    await pgPool.query(query, [eventid]);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+module.exports = {
+  getGroupEventById,
+  addGroupEvent,
+  deleteGroupReviewsByEventId,
+};

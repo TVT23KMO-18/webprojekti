@@ -1,44 +1,27 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import axios from "axios";
 import { useState } from "react";
+
 import { useNavigate, useParams } from "react-router-dom";
-import "./UusiArvostelu.css";
+
 import { UserContext } from "../context/UserContext";
 
-export default function UusiElokuvaRyhmään() {
-  const { mediaType, movieId, title } = useParams();
-  const [text, setText] = useState("");
-  const [idgroup, setIdgroup] = useState("");
-  const { userid, token } = useContext(UserContext);
-  const { userName, setUserName } = useState("");
+export default function UusiArvosteluRyhmään() {
   const [groups, setGroups] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState("");
-  console.log(mediaType);
-  console.log(movieId);
-  console.log(title);
-  console.log(userid);
+  const { idreviews } = useParams();
+  const [idgroup, setIdgroup] = useState("");
+  const { userid, token } = useContext(UserContext);
   const navigate = useNavigate();
-
-  async function setGroupMovie() {
+  async function setGroupRewiev() {
     console.log(token);
 
-    let serieid = "";
-    let id = "";
-    if (mediaType === "movie") {
-      serieid = null;
-      id = movieId;
-    } else {
-      serieid = movieId;
-      id = null;
-    }
     try {
       const response = await axios.post(
-        "http://localhost:3001/groupmovies",
+        "http://localhost:3001/groupreviews",
         {
-          iduser: userid,
+          idreviews: idreviews,
           idgroup: idgroup,
-          movieid: id,
-          serieid: serieid,
         },
         {
           headers: {
@@ -47,8 +30,8 @@ export default function UusiElokuvaRyhmään() {
           },
         }
       );
-      window.alert("Elokuva lisätty");
-      navigate("/");
+      window.alert("Arvostelu lisätty ryhmään");
+      navigate("/arvostelut");
     } catch (error) {
       window.alert(error);
       console.error(error);
@@ -71,7 +54,6 @@ export default function UusiElokuvaRyhmään() {
       console.error("Error fetching groups:", error);
     }
   }
-
   async function nameFromId(idUser) {
     const url = `http://localhost:3001/user/oneuser?iduser=${idUser}`;
     try {
@@ -91,23 +73,16 @@ export default function UusiElokuvaRyhmään() {
       throw error;
     }
   }
-  useEffect(() => {
-    getGroups(userid);
-  }, [userid]);
-
   function handleGroupChange(event) {
     const selectedIdgroup = event.target.value;
     setSelectedGroup(selectedIdgroup);
     setIdgroup(selectedIdgroup);
   }
+  getGroups(userid);
   return (
-    <div className="uusielokuvaryhmääncontainer">
-      <p>{mediaType}</p>
-      <p>{movieId}</p>
-      <p>{title}</p>
-      <p>{userid}</p>
-      <p>{userName}</p>
+    <div>
       <div>
+        <p>{idreviews}</p>
         <label htmlFor="groupSelect">Select a group:</label>
         <select
           id="groupSelect"
@@ -122,7 +97,7 @@ export default function UusiElokuvaRyhmään() {
           ))}
         </select>
       </div>
-      <button onClick={setGroupMovie}>Lähetä elokuva</button>
+      <button onClick={setGroupRewiev}>Lähetä arvostelu</button>
     </div>
   );
 }

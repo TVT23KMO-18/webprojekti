@@ -1,0 +1,95 @@
+.etusivu {
+    height: 1300px;
+}
+
+.etusivu-teksti {
+    border: 2px;
+    float: left;
+    width: 40%;
+    height: 500px;
+    margin: 40px;
+    padding: 20px;
+    line-height: 1.5;
+}
+
+.etusivu-näytökset {
+    border: 2px;
+    float: right;
+    width: 45%;
+    height: 820px;
+    margin: 20px;
+    text-align: center;
+}
+
+.etusivu-movie-container {
+    display: inline-block;
+    margin: 10px;
+    text-align: center;
+}
+
+.etusivu-elokuva-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+}
+
+.etusivu-elokuva-info {
+    margin: 10px;
+}
+
+.etusivu-kuva img {
+    width: auto;
+    height: 150px;
+}
+
+.etusivu-uutiset {
+    position: relative;
+    border: 2px;
+    width: calc(100% - 80px);
+    margin: 40px;
+    float: left;
+}
+  
+.etusivu-uutiset-info {
+    border: 2px;
+    width: 200px;
+    height: 280px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px;
+}
+  
+.etusivu-uutiset-kuva {
+    width: 200px;
+    height: 150px;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+@media only screen and (max-width: 800px) {
+    .etusivu {
+        height: 4000px;
+    }
+
+    .etusivu-teksti {
+        width: 90%;
+        height: auto;
+        margin: 10px auto;
+        float: none;
+    }
+    .etusivu-näytökset {
+        width: 90%;
+        height: auto;
+        margin: 10px auto;
+        float: none;
+    }
+    .etusivu-uutiset {
+        width: 90%;
+        height: auto;
+        margin: 10px auto;
+        float: none;
+    }
+}
+
+  

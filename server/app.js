@@ -8,6 +8,7 @@ const auth = require("../routes/auth");
 const groupMovies = require("../routes/group_movies");
 const groupRewies = require("../routes/group_reviews");
 const groupEvents = require("../routes/group_event");
+const groupRequest = require("../routes/group_request");
 const pgPool = require("../database/pg_connection");
 
 const express = require("express");
@@ -30,6 +31,7 @@ app.use("/auth", auth);
 app.use("/groupmovies", groupMovies);
 app.use("/groupreviews", groupRewies);
 app.use("/groupevents", groupEvents);
+app.use("/grouprequest", groupRequest);
 
 app.listen(port, () => {
   console.log(`App is running on port ${port}`);

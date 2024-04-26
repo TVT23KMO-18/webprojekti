@@ -297,3 +297,38 @@ ALTER TABLE group_event
 ADD COLUMN startingTime TIMESTAMP,
 ADD COLUMN urlToShow VARCHAR(255),
 ADD COLUMN theatre VARCHAR(100);
+
+
+CREATE TABLE group_request (
+    idgroup_request SERIAL PRIMARY KEY,
+    idgroup INTEGER REFERENCES "group"(idgroup),
+    iduser INTEGER REFERENCES users(iduser)
+);
+
+-- Add CASCADE to group_movies table
+ALTER TABLE group_movies
+  DROP CONSTRAINT IF EXISTS group_movies_iduser_fkey,
+  DROP CONSTRAINT IF EXISTS group_movies_idgroup_fkey,
+  ADD CONSTRAINT group_movies_iduser_fkey FOREIGN KEY (iduser) REFERENCES users(iduser) ON DELETE CASCADE,
+  ADD CONSTRAINT group_movies_idgroup_fkey FOREIGN KEY (idgroup) REFERENCES "group"(idgroup) ON DELETE CASCADE;
+
+-- Add CASCADE to group_reviews table
+ALTER TABLE group_reviews
+  DROP CONSTRAINT IF EXISTS group_reviews_idgroup_fkey,
+  DROP CONSTRAINT IF EXISTS group_reviews_idreviews_fkey,
+  ADD CONSTRAINT group_reviews_idgroup_fkey FOREIGN KEY (idgroup) REFERENCES "group"(idgroup) ON DELETE CASCADE,
+  ADD CONSTRAINT group_reviews_idreviews_fkey FOREIGN KEY (idreviews) REFERENCES reviews(idreviews) ON DELETE CASCADE;
+
+-- Add CASCADE to group_event table
+ALTER TABLE group_event
+  DROP CONSTRAINT IF EXISTS group_event_idgroup_fkey,
+  ADD CONSTRAINT group_event_idgroup_fkey FOREIGN KEY (idgroup) REFERENCES "group"(idgroup) ON DELETE CASCADE;
+
+-- Add CASCADE to group_request table
+ALTER TABLE group_request
+  DROP CONSTRAINT IF EXISTS group_request_idgroup_fkey,
+  DROP CONSTRAINT IF EXISTS group_request_iduser_fkey,
+  ADD CONSTRAINT group_request_idgroup_fkey FOREIGN KEY (idgroup) REFERENCES "group"(idgroup) ON DELETE CASCADE,
+  ADD CONSTRAINT group_request_iduser_fkey FOREIGN KEY (iduser) REFERENCES users(iduser) ON DELETE CASCADE;
+
+

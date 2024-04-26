@@ -18,19 +18,28 @@ async function getGroups(username) {
 
 async function getUsersFromGroup(idgroup) {
   let usernames = [];
-  let result = await pgPool.query('SELECT iduser FROM group_membership WHERE idgroup=$1', [idgroup]);
+  let result = await pgPool.query(
+    "SELECT iduser FROM group_membership WHERE idgroup=$1",
+    [idgroup]
+  );
   const idUsers = result.rows;
-  for(user of idUsers) {
-    console.log(user.iduser)
-    let queryResult = await pgPool.query('SELECT username FROM users WHERE iduser=$1', [user.iduser])
-    usernames.push(queryResult.rows[0].username)
+  for (user of idUsers) {
+    console.log(user.iduser);
+    let queryResult = await pgPool.query(
+      "SELECT username FROM users WHERE iduser=$1",
+      [user.iduser]
+    );
+    usernames.push(queryResult.rows[0].username);
   }
   return usernames;
 }
 
 async function getOwner(idgroup) {
-  let result = await pgPool.query('SELECT owner FROM "group" WHERE idgroup=$1', [idgroup])
-  return result.rows[0].owner
+  let result = await pgPool.query(
+    'SELECT owner FROM "group" WHERE idgroup=$1',
+    [idgroup]
+  );
+  return result.rows[0].owner;
 }
 
 async function allGroups() {
@@ -77,10 +86,31 @@ async function deleteGroup(id) {
 }
 
 async function deleteUser(username, idgroup) {
-  let result = await pgPool.query('SELECT iduser FROM users WHERE username=$1', [username]);
+  let result = await pgPool.query(
+    "SELECT iduser FROM users WHERE username=$1",
+    [username]
+  );
   let user = result.rows[0].iduser;
-  await pgPool.query('DELETE FROM group_membership WHERE idgroup=$1 AND iduser=$2', [idgroup, user])
+  await pgPool.query(
+    "DELETE FROM group_membership WHERE idgroup=$1 AND iduser=$2",
+    [idgroup, user]
+  );
   // TEE NIIN ETTÄ SE POISTAA VAIN TIETYSTÄ RYHMÄSTÄ SEN KÄYTTÄJÄN, NYT SE POISTAA JOKAISESTA
+}
+async function getGroupsByOwner(owner) {
+  try {
+    const query = `
+          SELECT *
+          FROM "group"
+          WHERE owner = $1
+        `;
+
+    const result = await pgPool.query(query, [owner]);
+    return result.rows;
+  } catch (error) {
+    console.error("Error fetching requests", error);
+    throw error;
+  }
 }
 
 module.exports = {
@@ -91,5 +121,6 @@ module.exports = {
   deleteGroup,
   getUsersFromGroup,
   getOwner,
-  deleteUser
+  deleteUser,
+  getGroupsByOwner,
 };

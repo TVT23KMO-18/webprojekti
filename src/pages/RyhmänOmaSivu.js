@@ -317,11 +317,10 @@ export default function RyhmänOmaSivu() {
   function formatStartingTime(startingTime) {
     const date = new Date(startingTime);
     const day = date.getDate();
-    const month = date.getMonth() + 1; // January is 0
+    const month = date.getMonth() + 1;
     const hours = date.getHours();
     const minutes = date.getMinutes();
 
-    // Add leading zeros if needed
     const formattedMonth = month < 10 ? `0${month}` : month;
     const formattedDay = day < 10 ? `0${day}` : day;
     const formattedHours = hours < 10 ? `0${hours}` : hours;

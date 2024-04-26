@@ -12,7 +12,7 @@ export default function RyhmänOmaSivu() {
   const [arvostelut, setArvostelut] = useState([]);
   const [näytökset, setNäytökset] = useState([]);
   const [jäsenet, setJäsenet] = useState([]);
-  const [owner, setOwner] = useState('');
+  const [owner, setOwner] = useState("");
 
   useEffect(() => {
     async function getOwnerFromGroup() {
@@ -22,7 +22,7 @@ export default function RyhmänOmaSivu() {
         const ownerData = await data.json();
         setOwner(ownerData);
       } catch (error) {
-        console.log('ei')
+        console.log("ei");
       }
     }
     getOwnerFromGroup();
@@ -31,24 +31,24 @@ export default function RyhmänOmaSivu() {
   useEffect(() => {
     console.log(owner);
   }, [owner]);
-  
+
   useEffect(() => {
     async function getUsersFromGroup() {
       try {
         const url = `http://localhost:3001/group/users/${idgroup}`;
         const data = await fetch(url);
         const usersData = await data.json();
-        setJäsenet(usersData)
-        console.log(jäsenet)
+        setJäsenet(usersData);
+        console.log(jäsenet);
       } catch (error) {
-        console.log('ei')
+        console.log("ei");
       }
     }
     getUsersFromGroup();
   }, []);
 
   useEffect(() => {
-    console.log(idgroup)
+    console.log(idgroup);
     async function fetchData(idgroup) {
       try {
         const url = `http://localhost:3001/groupmovies/movies/${idgroup}`;
@@ -293,11 +293,10 @@ export default function RyhmänOmaSivu() {
   function formatStartingTime(startingTime) {
     const date = new Date(startingTime);
     const day = date.getDate();
-    const month = date.getMonth() + 1; // January is 0
+    const month = date.getMonth() + 1;
     const hours = date.getHours();
     const minutes = date.getMinutes();
 
-    // Add leading zeros if needed
     const formattedMonth = month < 10 ? `0${month}` : month;
     const formattedDay = day < 10 ? `0${day}` : day;
     const formattedHours = hours < 10 ? `0${hours}` : hours;
@@ -355,27 +354,30 @@ export default function RyhmänOmaSivu() {
   }
 
   const deleteMember = async (jäsen, idgroup) => {
-      if (jäsen != owner) {
-        const data = {
-          username: jäsen,
-          idgroup: idgroup
-        };
-        const jsonData = JSON.stringify(data);
-        const options = {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-        try {
-          console.log(jsonData)
-          /*axios.delete("http://localhost:3001/group/deletebyusername", jsonData, options)*/
-          axios.delete("http://localhost:3001/group/deletebyusername", { data: jsonData, ...options })
-        } catch(error) {
-          console.log('Error')
-        }
-      } else {
-        alert('Omistaja ei voi poistaa itseään')
+    if (jäsen != owner) {
+      const data = {
+        username: jäsen,
+        idgroup: idgroup,
+      };
+      const jsonData = JSON.stringify(data);
+      const options = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      try {
+        console.log(jsonData);
+        /*axios.delete("http://localhost:3001/group/deletebyusername", jsonData, options)*/
+        axios.delete("http://localhost:3001/group/deletebyusername", {
+          data: jsonData,
+          ...options,
+        });
+      } catch (error) {
+        console.log("Error");
       }
+    } else {
+      alert("Omistaja ei voi poistaa itseään");
+    }
   };
 
   useEffect(() => {
@@ -427,14 +429,16 @@ export default function RyhmänOmaSivu() {
         </div>
         <div className="ryhmä-sivun-jäsenet">
           <h4>Ryhmän Jäsenet</h4>
-            {jäsenet.map((jäsen, index) => (
-              <div className="ryhmän-jäsenet" key={index}>
-                <p>{jäsen}</p>
-                {user.username === owner && (
-                  <button onClick={() => deleteMember(jäsen, idgroup)}>Poista käyttäjä ryhmästä</button>
-                )}
-              </div>
-            ))}
+          {jäsenet.map((jäsen, index) => (
+            <div className="ryhmän-jäsenet" key={index}>
+              <p>{jäsen}</p>
+              {user.username === owner && (
+                <button onClick={() => deleteMember(jäsen, idgroup)}>
+                  Poista käyttäjä ryhmästä
+                </button>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </>

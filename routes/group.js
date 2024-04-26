@@ -6,7 +6,8 @@ const {
   deleteGroup,
   getUsersFromGroup,
   getOwner,
-  deleteUser
+  deleteUser,
+  getGroupsByOwner,
 } = require("../database/group_db");
 
 const router = require("../server/node_modules/express").Router();
@@ -15,20 +16,24 @@ router.get("/users/:idgroup", async (req, res) => {
   try {
     const users = await getUsersFromGroup(req.params.idgroup);
     res.json(users);
-  } catch(error) {
-    res.status(500).json({ success: false, message: "Virhe käyttäjien hakemisessa" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ success: false, message: "Virhe käyttäjien hakemisessa" });
   }
 });
 
 router.get("/groupowner/:idgroup", async (req, res) => {
-  console.log('joo')
+  console.log("joo");
   try {
     const owner = await getOwner(req.params.idgroup);
     res.json(owner);
-  } catch(error) {
-    res.status(500).json({ success: false, message: "Virhe ryhmän omistajan hakemisessa" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ success: false, message: "Virhe ryhmän omistajan hakemisessa" });
   }
-})
+});
 
 router.get("/groups", async (req, res) => {
   try {
@@ -90,13 +95,24 @@ router.delete("/", async (req, res) => {
 router.delete("/deletebyusername", async (req, res) => {
   // TEE NIIN ETTÄ SE POISTAA VAIN TIETYSTÄ RYHMÄSTÄ SEN KÄYTTÄJÄN, NYT SE POISTAA JOKAISESTA
   try {
-    console.log(req.body.username, req.body.idgroup)
+    console.log(req.body.username, req.body.idgroup);
     deleteUser(req.body.username, req.body.idgroup);
     res.end();
-  } catch(error) {
+  } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Internal server error." });
   }
-})
+});
+router.get("/groupsbyowner/:owner", async (req, res) => {
+  const owner = req.params.owner;
+
+  try {
+    const result = await getGroupsByOwner(owner);
+    res.json(result);
+  } catch (error) {
+    console.error("Error fetching groups by owner:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 module.exports = router;

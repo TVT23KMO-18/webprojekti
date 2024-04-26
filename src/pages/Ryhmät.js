@@ -89,7 +89,6 @@ export default function Ryhmät() {
   };
   //********************************************************** */
   async function getrequests() {
-    //console.log(user.username);
     const käyttäjännimi = user.username;
 
     try {
@@ -119,8 +118,7 @@ export default function Ryhmät() {
           });
         }
       }
-      //console.log("toimiiiiikoo");
-      //console.log(data);
+
       console.log(groups);
       setGroupRequest(groups);
     } catch (error) {
@@ -139,7 +137,7 @@ export default function Ryhmät() {
       const userData = dataArray[0];
 
       const username = userData.username;
-      // console.log(username);
+
       return username;
     } catch (error) {
       console.error("Fetch error:", error);
@@ -185,9 +183,6 @@ export default function Ryhmät() {
 
   async function addRequest(idgroup, iduser, index) {
     try {
-      console.log("idgroup: " + idgroup);
-      //console.log("iduser: " + iduser);
-      //console.log(user.username);
       iduser = await nameToUserId(user.username);
 
       console.log(iduser);

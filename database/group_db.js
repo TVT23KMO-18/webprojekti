@@ -83,6 +83,7 @@ async function allUsernameGroups(username) {
 
 async function deleteGroup(id) {
   await pgPool.query('DELETE FROM "group" WHERE idgroup=$1', [id]);
+  await pgPool.query('DELETE FROM group_membership WHERE idgroup = $1', [id]);
 }
 
 async function deleteUser(username, idgroup) {
@@ -95,7 +96,6 @@ async function deleteUser(username, idgroup) {
     "DELETE FROM group_membership WHERE idgroup=$1 AND iduser=$2",
     [idgroup, user]
   );
-  // TEE NIIN ETTÄ SE POISTAA VAIN TIETYSTÄ RYHMÄSTÄ SEN KÄYTTÄJÄN, NYT SE POISTAA JOKAISESTA
 }
 async function getGroupsByOwner(owner) {
   try {

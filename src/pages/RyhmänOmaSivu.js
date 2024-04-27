@@ -391,11 +391,11 @@ export default function RyhmänOmaSivu() {
       };
       try {
         console.log(jsonData);
-        /*axios.delete("http://localhost:3001/group/deletebyusername", jsonData, options)*/
         axios.delete("http://localhost:3001/group/deletebyusername", {
           data: jsonData,
           ...options,
         });
+        alert('Käyttäjä poistettu.')
       } catch (error) {
         console.log("Error");
       }
@@ -407,6 +407,28 @@ export default function RyhmänOmaSivu() {
   useEffect(() => {
     console.log(jäsenet);
   }, [jäsenet]);
+
+  const deleteGroup = async (idgroup) => {
+    const data = {
+      idgroup: idgroup
+    }
+    const jsonData = JSON.stringify(data)
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      console.log(jsonData);
+      axios.delete("http://localhost:3001/group", {
+        data: jsonData,
+        ...options,
+      });
+      alert('Ryhmä poistettu.')
+    } catch (error) {
+      console.log("Error");
+    }
+  }
 
   return (
     <div className="ryhmäbody">
@@ -465,6 +487,11 @@ export default function RyhmänOmaSivu() {
               )}
             </div>
           ))}
+        </div>
+        <div>
+          {user.username === owner && (
+            <button className="poista-ryhmä" onClick={() => deleteGroup(idgroup)}>Poista Ryhmä</button>
+          )}
         </div>
       </div>
     </div>

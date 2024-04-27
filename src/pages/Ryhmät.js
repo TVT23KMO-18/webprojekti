@@ -83,6 +83,7 @@ export default function Ryhmät() {
     };
     try {
       await axios.post("http://localhost:3001/group", jsonData, options);
+      alert('Ryhmä luotu')
     } catch (error) {
       console.log("Error creating group:", error);
     }

@@ -93,7 +93,6 @@ router.delete("/", async (req, res) => {
 });
 
 router.delete("/deletebyusername", async (req, res) => {
-  // TEE NIIN ETTÄ SE POISTAA VAIN TIETYSTÄ RYHMÄSTÄ SEN KÄYTTÄJÄN, NYT SE POISTAA JOKAISESTA
   try {
     console.log(req.body.username, req.body.idgroup);
     deleteUser(req.body.username, req.body.idgroup);

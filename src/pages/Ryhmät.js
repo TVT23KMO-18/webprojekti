@@ -16,19 +16,17 @@ export default function Ryhmät() {
     const fetchGroups = async () => {
       try {
         if (user && user.username) {
-          console.log(user.username);
+          // console.log(user.username);
 
           const response = await axios.get(
             `http://localhost:3001/group/groups?username=${user.username}`
           );
-          console.log("Response Data:", response.data);
+
           const groupData = Object.values(response.data).map((group) => ({
             idgroup: group.idgroup,
             groupname: group.groupname,
           }));
-          console.log("1");
-          console.log(groupData);
-          console.log("2");
+
           setGroups(groupData);
           getrequests();
         }
@@ -83,7 +81,7 @@ export default function Ryhmät() {
     };
     try {
       await axios.post("http://localhost:3001/group", jsonData, options);
-      alert('Ryhmä luotu')
+      alert("Ryhmä luotu");
     } catch (error) {
       console.log("Error creating group:", error);
     }
@@ -96,7 +94,7 @@ export default function Ryhmät() {
       const url = `http://localhost:3001/group/groupsbyowner/${käyttäjännimi}`;
       const response = await fetch(url);
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       const groups = [];
       for (const item of data) {
         const idgroup = item.idgroup;
@@ -120,7 +118,7 @@ export default function Ryhmät() {
         }
       }
 
-      console.log(groups);
+      // console.log(groups);
       setGroupRequest(groups);
     } catch (error) {
       console.error("Fetch error:", error);
@@ -146,12 +144,12 @@ export default function Ryhmät() {
     }
   }
   async function declineRequest(idrequest) {
-    console.log(idrequest + " deleted");
+    // console.log(idrequest + " deleted");
     deleteRequest(idrequest);
     const joo = await getrequests();
   }
   async function acceptRequest(idrequest, idUser, idgroup) {
-    console.log(idrequest, idUser, idgroup);
+    //console.log(idrequest, idUser, idgroup);
     const joo = await addMember(idrequest, idUser, idgroup);
     deleteRequest(idrequest);
     const jooo = await getrequests();
@@ -161,8 +159,8 @@ export default function Ryhmät() {
     const deleteUrl = `http://localhost:3001/grouprequest/delete/${idrequest}`;
     try {
       const response = await axios.delete(deleteUrl);
-      console.log(response.data);
-      console.log(idrequest);
+      //console.log(response.data);
+      //console.log(idrequest);
     } catch (error) {
       throw error;
     }
@@ -176,7 +174,7 @@ export default function Ryhmät() {
           idGroup: idGroup,
         }
       );
-      console.log("Jäsen lisätty");
+      //console.log("Jäsen lisätty");
     } catch (error) {
       throw error;
     }
@@ -186,7 +184,7 @@ export default function Ryhmät() {
     try {
       iduser = await nameToUserId(user.username);
 
-      console.log(iduser);
+      //console.log(iduser);
       const response = await axios.post(
         "http://localhost:3001/grouprequest/add",
         {
@@ -206,7 +204,7 @@ export default function Ryhmät() {
       const response = await fetch(url);
 
       const data = await response.json();
-      console.log("Response Data:", data);
+      //console.log("Response Data:", data);
 
       const iduser = data[0].iduser;
 

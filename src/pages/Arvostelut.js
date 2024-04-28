@@ -21,7 +21,7 @@ export default function Arvostelut() {
           const idUser = arvostelu.iduser;
           const name = await nameFromId(idUser);
           const arvosteluid = arvostelu.idreviews;
-          console.log(arvosteluid);
+          // console.log(arvosteluid);
           const arvosteluTeksti = arvostelu.review_text;
           const arvosana = arvostelu.review_num;
           const movieId = arvostelu.movieid;

@@ -14,14 +14,14 @@ export default function UusiArvostelu() {
 
   const handleChange = (e) => {
     setRating(e.target.value);
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
 
   const textChange = (e) => {
     setText(e.target.value);
   };
   async function setReview() {
-    console.log(token);
+    //console.log(token);
 
     let serieid = "";
     let id = "";
@@ -53,7 +53,6 @@ export default function UusiArvostelu() {
       navigate("/arvostelut");
     } catch (error) {
       window.alert("Valitse arvosana");
-      console.error(error);
     }
   }
   return (

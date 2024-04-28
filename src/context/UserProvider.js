@@ -22,8 +22,8 @@ export default function UserProvider({ children }) {
       .then((response) => {
         const token = response.data.jwtToken;
         const userid = response.data.userid;
-        console.log(token);
-        console.log(userid);
+        //console.log(token);
+        //console.log(userid);
         setUserId(userid);
         setToken(token);
         setUser({ ...data, token: token, userid: userid });

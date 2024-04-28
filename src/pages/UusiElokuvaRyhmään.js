@@ -13,14 +13,11 @@ export default function UusiElokuvaRyhmään() {
   const { userName, setUserName } = useState("");
   const [groups, setGroups] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState("");
-  console.log(mediaType);
-  console.log(movieId);
-  console.log(title);
-  console.log(userid);
+  
   const navigate = useNavigate();
 
   async function setGroupMovie() {
-    console.log(token);
+    //console.log(token);
 
     let serieid = "";
     let id = "";
@@ -51,7 +48,7 @@ export default function UusiElokuvaRyhmään() {
       navigate("/");
     } catch (error) {
       window.alert(error);
-      console.error(error);
+     
     }
   }
 

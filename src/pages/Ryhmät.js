@@ -182,9 +182,33 @@ export default function Ryhmät() {
 
   async function addRequest(idgroup, iduser, index) {
     try {
+      const requestUrl = `http://localhost:3001/grouprequest/${idgroup}`;
+      const requestResponse = await fetch(requestUrl);
+      const requestDataArray = await requestResponse.json();
+      if (requestDataArray.length === 0) {
+        await postRequest(idgroup, iduser);
+      } else {
+        for (const requestItem of requestDataArray) {
+          const testiduser = requestItem.iduser;
+          const testidgroup = requestItem.idgroup;
+
+          if ((testiduser !== iduser) & (testidgroup !== idgroup)) {
+            await postRequest(idgroup, iduser);
+          } else {
+            window.alert(
+              "Olet jo lähettäny liittymispyynnän kyseiseen ryhmään"
+            );
+          }
+        }
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+  async function postRequest(idgroup, iduser) {
+    try {
       iduser = await nameToUserId(user.username);
 
-      //console.log(iduser);
       const response = await axios.post(
         "http://localhost:3001/grouprequest/add",
         {

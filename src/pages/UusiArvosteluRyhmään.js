@@ -14,7 +14,7 @@ export default function UusiArvosteluRyhmään() {
   const { userid, token } = useContext(UserContext);
   const navigate = useNavigate();
   async function setGroupRewiev() {
-    console.log(token);
+    //console.log(token);
 
     try {
       const response = await axios.post(
@@ -34,7 +34,7 @@ export default function UusiArvosteluRyhmään() {
       navigate("/arvostelut");
     } catch (error) {
       window.alert(error);
-      console.error(error);
+      
     }
   }
 

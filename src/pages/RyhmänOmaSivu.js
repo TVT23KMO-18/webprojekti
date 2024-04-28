@@ -22,14 +22,14 @@ export default function RyhmänOmaSivu() {
         const ownerData = await data.json();
         setOwner(ownerData);
       } catch (error) {
-        console.log("ei");
+        console.log(error);
       }
     }
     getOwnerFromGroup();
   }, []);
 
   useEffect(() => {
-    console.log(owner);
+    //console.log(owner);
   }, [owner]);
 
   useEffect(() => {
@@ -39,16 +39,16 @@ export default function RyhmänOmaSivu() {
         const data = await fetch(url);
         const usersData = await data.json();
         setJäsenet(usersData);
-        console.log(jäsenet);
+        //console.log(jäsenet);
       } catch (error) {
-        console.log("ei");
+        console.log(error);
       }
     }
     getUsersFromGroup();
   }, []);
 
   useEffect(() => {
-    console.log(idgroup);
+    //console.log(idgroup);
     async function fetchData(idgroup) {
       try {
         const url = `http://localhost:3001/groupmovies/movies/${idgroup}`;
@@ -279,14 +279,13 @@ export default function RyhmänOmaSivu() {
 
         const eventStartingTime = eventsData[i].startingtime;
         if (eventStartingTime < currentTime) {
-          console.log("menny jo tossaja");
           try {
             await fetch(`http://localhost:3001/groupevents/${eventid}`, {
               method: "DELETE",
             });
-            console.log("Event deleted:", eventid);
+            // console.log("Event deleted:", eventid);
           } catch (error) {
-            console.error("Error deleting event:", eventid, error);
+            // console.error("Error deleting event:", eventid, error);
           }
         } else {
           const eventTheatre = eventsData[i].theatre;
@@ -311,7 +310,7 @@ export default function RyhmänOmaSivu() {
 
       setNäytökset(events);
     } catch (error) {
-      console.log("ei toimi");
+      console.log(error);
     }
   }
   function formatStartingTime(startingTime) {
@@ -395,7 +394,7 @@ export default function RyhmänOmaSivu() {
           data: jsonData,
           ...options,
         });
-        alert('Käyttäjä poistettu.')
+        alert("Käyttäjä poistettu.");
       } catch (error) {
         console.log("Error");
       }
@@ -410,9 +409,9 @@ export default function RyhmänOmaSivu() {
 
   const deleteGroup = async (idgroup) => {
     const data = {
-      idgroup: idgroup
-    }
-    const jsonData = JSON.stringify(data)
+      idgroup: idgroup,
+    };
+    const jsonData = JSON.stringify(data);
     const options = {
       headers: {
         "Content-Type": "application/json",
@@ -424,11 +423,11 @@ export default function RyhmänOmaSivu() {
         data: jsonData,
         ...options,
       });
-      alert('Ryhmä poistettu.')
+      alert("Ryhmä poistettu.");
     } catch (error) {
       console.log("Error");
     }
-  }
+  };
 
   return (
     <div className="ryhmäbody">
@@ -490,7 +489,12 @@ export default function RyhmänOmaSivu() {
         </div>
         <div>
           {user.username === owner && (
-            <button className="poista-ryhmä" onClick={() => deleteGroup(idgroup)}>Poista Ryhmä</button>
+            <button
+              className="poista-ryhmä"
+              onClick={() => deleteGroup(idgroup)}
+            >
+              Poista Ryhmä
+            </button>
           )}
         </div>
       </div>

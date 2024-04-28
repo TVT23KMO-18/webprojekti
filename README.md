@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# Webprojekti
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Esittely 
 
-## Available Scripts
+Webprojekti on Oulun ammattikorkeakoulun 2. vuoden monimuoto-opiskelijoiden toteuttama sovellusprojekti, jossa tehtiin neljän hengen ryhmätyönä kuvitteellinen sivusto elokuvien ja tv-sarjojen faneille.  
 
-In the project directory, you can run:
+Tarkoituksena oli tehdä fullstack-projekti jossa front-end tehdään Javascriptillä React-kirjastolla. Back-end toteutettiin Node.js-ajoympäristöllä ja PostgreSQL-tietokannalla. Osa palveluista on kirjautumisen takana ja osaa voi käyttää kirjautumatta. 
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tietokannan suunnittelu
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Tietokannan luokkakaavio kuvattu kuvassa 1.
 
-### `npm test`
+![Kuva 1. Tietokannan luokkakaavio](/documents/er-diagram/ER-Diagram.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Sivun käyttöliittymä 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### UI-Wireframe 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Käyttöliittymän suunnittelu aloitettiin Wireframe-tekniikalla, jossa hahmotellaan käyttöliittymän luuranko. Kuvissa 2 ja 3 on esimerkkinä muutaman sivun luonnos. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Kuva 2. Arvostelu-sivun luonnos.](/documents/UI-Wireframe/ui_arvostelut.png)
 
-### `npm run eject`
+![Kuva 3. Haku-sivun luonnos.](/documents/UI-Wireframe/ui_haku.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Lopullinen käyttöliittymä 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Käyttöliittymän yläpalkista löytyy navigaatiopalkki, jolla pääsee eri sivuille, sekä linkit asiakastille kirjautumiseen.  Jos käyttäjä yrittää mennä kirjautumatta sivulle, joka vaatii kirjautumista, hänet siirretään kirjautumissivulle (kuva 4). Kirjautumisessa on mahdollisuus luoda uusi käyttäjä, jos tiliä ei ole vielä olemassa. 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![Kuva 4. Kirjautumissivu](/documents/Final-UI/finalui_kirjaudu.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Arvostelut-sivulle (kuva 5) käyttäjät voivat kirjoittaa elokuva- ja sarja-arvosteluja ja antaa arvosanoja. Arvosteluja voi kirjoittaa vain kirjautunut käyttäjä, mutta niitä voi selata kirjautumatta.
 
-## Learn More
+![Kuva 5. Arvostelut-sivu.](/documents/Final-UI/finalui_arvostelut.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Haku-sivulla (kuva 6) käyttäjä voi hakea elokuvia eri suodatuksilla tai suoraan elokuvien tai sarjojen nimillä. Käyttäjä voi lisätä elokuvia ja sarjoja omalle suosikkilistalle, ryhmiin tai lisätä arvostelun arvostelusivulle. 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![Kuva 6. Haku-sivu.](/documents/Final-UI/finalui_arvostelut.png)
 
-### Code Splitting
+Näytökset sivulla (kuva 7) voi selata Finnkino-teattereiden näytösaikoja eri paikkakunnilta ja eri päiviltä. Käyttäjä voi linkittää näytösaikoja myös kuulumiinsa ryhmiin ryhmäsivulla. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![Kuva 7. Näytökset sivu.](/documents/Final-UI/finalui_naytokset.png)
 
-### Analyzing the Bundle Size
+## Mobiilikäyttöliittymä 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Sivu tukee mobiilikäyttöä (kuva 8). Navigointipalkki siirtyy käyttöliittymän vasempaan yläreunaan, ja sen avaamalla voi siirtyä toisille sivuille. Sivujen sisältö reagoi myös mobiilinäkymään. Valikot siirtyvät allekkain ja sivulla esitetään vähemmän kuvia rinnakkain. 
 
-### Making a Progressive Web App
+![Kuva 8. Mobiilinäkymä.](/documents/Final-UI/finalui_mobiili.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Käytetyt työkalut ja tekniikat 
 
-### Advanced Configuration
+UI/UX Wireframe, Node.js, React, JavaScript, PostgreSQL, pgAdmin, VS Code, Postman 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Tekijät ja suoritetut osa-alueet 
 
-### Deployment
+Lehto Santeri 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+    + Näytökset-sivu 
+    + Arvostelut-sivu 
+    + Arvostelujen, elokuvien, sarjojen lisääminen Haku-sivulta muille sivuille 
+    + Ryhmä-sivun osia
 
-### `npm run build` fails to minify
+Luiro Jarkko 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    + Haku-sivu 
+    + Etusivu 
+
+Malinen Tatu 
+
+    + Backendin alustus 
+    + Oma-sivu 
+    + Login-sivu 
+    + Ryhmä-sivun osia
+    + Postman-dokumentaatio ja luokkakaavio tietokannasta
+
+Moskuvaara Aake 
+
+    + Projektin backlogin tekeminen ja johtaminen 
+    + UI-Wireframe 
+    + Frontendin alustus 
+    + Rekisteröintisivu 
+    + Testauskoodit 
+    + Käyttöliittymän responsiivisuus ja ulkonäkö 
+    + Suosikit-sivu

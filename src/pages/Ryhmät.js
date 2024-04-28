@@ -157,13 +157,13 @@ export default function Ryhmät() {
   async function declineRequest(idrequest) {
     // console.log(idrequest + " deleted");
     deleteRequest(idrequest);
-    const joo = await getrequests();
+    await getrequests();
   }
   async function acceptRequest(idrequest, idUser, idgroup) {
     //console.log(idrequest, idUser, idgroup);
-    const joo = await addMember(idrequest, idUser, idgroup);
-    deleteRequest(idrequest);
-    const jooo = await getrequests();
+    await addMember(idrequest, idUser, idgroup);
+    await deleteRequest(idrequest);
+    await getrequests();
   }
 
   async function deleteRequest(idrequest) {
@@ -185,7 +185,7 @@ export default function Ryhmät() {
           idGroup: idGroup,
         }
       );
-      //console.log("Jäsen lisätty");
+      // console.log("Jäsen lisätty");
     } catch (error) {
       throw error;
     }

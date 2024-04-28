@@ -82,6 +82,17 @@ export default function Ryhmät() {
     try {
       await axios.post("http://localhost:3001/group", jsonData, options);
       alert("Ryhmä luotu");
+      const response = await axios.get(
+        `http://localhost:3001/group/groups?username=${user.username}`
+      );
+
+      const groupData = Object.values(response.data).map((group) => ({
+        idgroup: group.idgroup,
+        groupname: group.groupname,
+      }));
+
+      setGroups(groupData);
+      getrequests();
     } catch (error) {
       console.log("Error creating group:", error);
     }

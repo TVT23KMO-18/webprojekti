@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { json, useParams } from "react-router-dom";
+import { json, useParams, useNavigate } from "react-router-dom";
 import "./RyhmänOmaSivu.css";
 import StarRating from "./StarRating";
 import { UserContext } from "../context/UserContext";
@@ -13,6 +13,7 @@ export default function RyhmänOmaSivu() {
   const [näytökset, setNäytökset] = useState([]);
   const [jäsenet, setJäsenet] = useState([]);
   const [owner, setOwner] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getOwnerFromGroup() {
@@ -395,6 +396,10 @@ export default function RyhmänOmaSivu() {
           ...options,
         });
         alert("Käyttäjä poistettu.");
+        const url = `http://localhost:3001/group/users/${idgroup}`;
+        const data = await fetch(url);
+        const usersData = await data.json();
+        setJäsenet(usersData);
       } catch (error) {
         console.log("Error");
       }
@@ -424,6 +429,7 @@ export default function RyhmänOmaSivu() {
         ...options,
       });
       alert("Ryhmä poistettu.");
+      navigate('/Ryhmät')
     } catch (error) {
       console.log("Error");
     }

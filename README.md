@@ -54,6 +54,7 @@ Näytökset sivulla (kuva 7) voi selata Finnkino-teattereiden näytösaikoja eri
 Sivu tukee mobiilikäyttöä (kuva 8). Navigointipalkki siirtyy käyttöliittymän vasempaan yläreunaan, ja sen avaamalla voi siirtyä toisille sivuille. Sivujen sisältö reagoi myös mobiilinäkymään. Valikot siirtyvät allekkain ja sivulla esitetään vähemmän kuvia rinnakkain. 
 
 ![Kuva 8. Mobiilinäkymä.](/documents/Final-UI/finalui_mobiili.png)
+
 ***Kuva 8. Lopullinen mobiilinäkymä.***
 
 ## Käytetyt työkalut ja tekniikat 

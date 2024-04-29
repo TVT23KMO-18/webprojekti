@@ -55,6 +55,7 @@ async function deleteUser(username) {
       );
       if (username == owner.rows[0].owner) {
         await pgPool.query('DELETE FROM "group" WHERE idgroup=$1', [idGroup]);
+        await pgPool.query('DELETE FROM group_membership WHERE idgroup=$1', [idGroup]);
       }
     }
     await pgPool.query("DELETE FROM reviews WHERE iduser=$1", [idUser]);

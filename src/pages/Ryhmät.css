@@ -1,71 +1,111 @@
 .ryhmatcontainer {
-  width: 90%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
+  margin: 50px;
+}
+
+.ryhmatcontainer h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
 .ryhma-grid-container {
-  width: 100%;
-  height: 100%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 100px);
+  grid-template-columns: 1fr;
+  gap: 20px;
 }
 
-.yksi {
-  grid-area: 1 / 1 / 2 / 3;
+.yksi, .kaksi, .kolme {
+  width: 100%;
 }
 
-.kaksi {
-  grid-area: 3 / 1 / 4 / 3;
-}
-
-.kolme {
-  grid-area: 2 / 1 / 3 / 3;
-}
-
-.liittymispyynnot {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding-top: 50px;
-}
-
-.ryhma-grid-container > div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-left: 20px;
-  gap: 10px;
-}
-
-.ryhmanimi-input {
-  display: flex;
-}
-
-.ryhmanimi-input button {
+.ryhmanimi-input input {
+  margin-bottom: 10px;
+  padding: 5px;
+  width: 100%;
   background-color: var(--light-color);
   color: var(--dark-color);
-  height: 50px;
-  width: 100px;
+}
+
+.ryhmatcontainer button {
+  padding: 5px 10px;
+  background-color: var(--light-color);
+  color: var(--dark-color);
   font-size: larger;
 }
 
-.liittymispyynnot > div {
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
+.liittymispyynnot {
+  width: 100%;
 }
 
 .requests {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
   margin-bottom: 10px;
 }
+
 .requests p {
+  margin: 5px 0;
+}
+
+.requests button {
+  margin-right: 10px;
+}
+
+.kaksi button {
   margin-left: 10px;
+}
+
+
+.ryhmat-ei-kirjautunut {
+  margin-top: 20px;
+}
+
+.ryhmat-ei-kirjautunut table, .kaksi table {
+  width: 50%;
+  border-collapse: collapse;
+}
+
+.ryhmat-ei-kirjautunut th, .ryhmat-ei-kirjautunut td,
+.kaksi th, .kaksi td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: justify;
+}
+
+.kaksi th, .kaksi td {
+  min-width: 120px; 
+  padding: 8px;
+  text-align: justify;
+}
+
+.yksi ul {
+  list-style: none; 
+  padding: 0;
+}
+
+.yksi li {
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  padding: 8px;
+  width: 50%;
+}
+
+.yksi li a {
+  font-size: 16px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.yksi a:hover {
+  color: var(--accent-color);
+}
+
+
+
+.ryhmat-ei-kirjautunut tbody tr:nth-child(even),
+.kaksi tbody tr:nth-child(even){
+  background-color: #f2f2f2;
+}
+
+@media only screen and (min-width: 800px) {
+  .ryhma-grid-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }

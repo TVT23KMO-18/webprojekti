@@ -1,6 +1,7 @@
 .ryhmäbody h3 {
-  font-size: 40px;
-  padding-top: 20px;
+  font-size: 30px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 .Ryhmänomansivuncontainer {
@@ -8,6 +9,27 @@
   text-align: center;
   justify-content: center;
 }
+
+.Ryhmänomansivuncontainer h3 {
+  text-align: left;
+}
+
+.Ryhmänomansivuncontainer h4 {
+  font-size: 20px;
+}
+
+.Ryhmänomansivuncontainer button {
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  height: 40px;
+  font-size: larger;
+}
+
+.ryhmän-jäsenet p {
+  margin-top: 10px;
+  font-size: 20px;
+}
+
 .ryhmällejaetutelokuvat {
   display: flex;
   flex-wrap: wrap;
@@ -54,8 +76,6 @@
   width: 230px;
   border-style: solid;
   margin: 10px;
-}
-.ryhmän-jäsenet {
 }
 
 .poista-ryhmä {

@@ -22,7 +22,6 @@ export default function Register_user() {
         json,
         options
       );
-      // console.log(response);
       alert("Käyttäjä luotiin. Voit nyt kirjautua sisään tunnuksellasi.");
       navigate("/login");
     } catch (error) {
@@ -45,7 +44,6 @@ export default function Register_user() {
     if (username.length > 0 && password.length > 0) {
       const data = { username: username, password: password };
       await register(data);
-      console.log(data);
     } else {
       alert("Käyttäjänimi tai salasana puuttuu");
     }

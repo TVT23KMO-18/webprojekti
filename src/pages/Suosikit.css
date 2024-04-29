@@ -5,6 +5,13 @@
     margin-bottom: 80px;
   }
 
+.favorites-container button {
+  padding: 5px 10px;
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  font-size: larger;
+}
+
 .favorite {
     display: flex;
     margin-bottom: 20px;

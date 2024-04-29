@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "./UusiArvostelu.css";
+import "./UusiElokuvaRyhmään.css";
 import { UserContext } from "../context/UserContext";
 
 export default function UusiElokuvaRyhmään() {
@@ -17,7 +17,6 @@ export default function UusiElokuvaRyhmään() {
   const navigate = useNavigate();
 
   async function setGroupMovie() {
-    //console.log(token);
 
     let serieid = "";
     let id = "";
@@ -62,7 +61,6 @@ export default function UusiElokuvaRyhmään() {
         idgroup: group.idgroup,
         groupname: group.groupname,
       }));
-      console.log(groupData);
       setGroups(groupData);
     } catch (error) {
       console.error("Error fetching groups:", error);
@@ -99,11 +97,7 @@ export default function UusiElokuvaRyhmään() {
   }
   return (
     <div className="uusielokuvaryhmääncontainer">
-      <p>{mediaType}</p>
-      <p>{movieId}</p>
       <p>{title}</p>
-      <p>{userid}</p>
-      <p>{userName}</p>
       <div>
         <label htmlFor="groupSelect">Select a group:</label>
         <select

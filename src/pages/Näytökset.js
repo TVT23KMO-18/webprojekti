@@ -24,7 +24,6 @@ function Näytökset() {
   useEffect(() => {
     const parser = new DOMParser();
     const url = `https://www.finnkino.fi/xml/Schedule/?area=${areaId}&dt=${selectedDate}`;
-    //console.log(selectedDate);
     fetch(url)
       .then((response) => {
         if (!response.ok) {
@@ -64,7 +63,6 @@ function Näytökset() {
           const ShowURL = ShowURLElement.textContent;
           const eventIdElement = showElement.querySelector("EventID");
           const eventID = eventIdElement.textContent;
-          // console.log(eventID);
           const TheatreAuditoriumElement = showElement.querySelector(
             "TheatreAndAuditorium"
           );
@@ -96,7 +94,6 @@ function Näytökset() {
     setSelectedDate(date);
   };
   async function setGroupEvent() {
-    //console.log(token);
 
     try {
       const response = await axios.post(
@@ -150,7 +147,6 @@ function Näytökset() {
         idgroup: group.idgroup,
         groupname: group.groupname,
       }));
-      // console.log(groupData);
       setGroups(groupData);
     } catch (error) {
       console.error("Error fetching groups:", error);

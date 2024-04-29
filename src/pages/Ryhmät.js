@@ -16,7 +16,6 @@ export default function Ryhmät() {
     const fetchGroups = async () => {
       try {
         if (user && user.username) {
-          // console.log(user.username);
 
           const response = await axios.get(
             `http://localhost:3001/group/groups?username=${user.username}`
@@ -97,7 +96,7 @@ export default function Ryhmät() {
       console.log("Error creating group:", error);
     }
   };
-  //********************************************************** */
+
   async function getrequests() {
     const käyttäjännimi = user.username;
 
@@ -105,7 +104,6 @@ export default function Ryhmät() {
       const url = `http://localhost:3001/group/groupsbyowner/${käyttäjännimi}`;
       const response = await fetch(url);
       const data = await response.json();
-      // console.log(data);
       const groups = [];
       for (const item of data) {
         const idgroup = item.idgroup;
@@ -129,7 +127,6 @@ export default function Ryhmät() {
         }
       }
 
-      // console.log(groups);
       setGroupRequest(groups);
     } catch (error) {
       console.error("Fetch error:", error);
@@ -155,12 +152,10 @@ export default function Ryhmät() {
     }
   }
   async function declineRequest(idrequest) {
-    // console.log(idrequest + " deleted");
     deleteRequest(idrequest);
     await getrequests();
   }
   async function acceptRequest(idrequest, idUser, idgroup) {
-    //console.log(idrequest, idUser, idgroup);
     await addMember(idrequest, idUser, idgroup);
     await deleteRequest(idrequest);
     await getrequests();
@@ -170,8 +165,6 @@ export default function Ryhmät() {
     const deleteUrl = `http://localhost:3001/grouprequest/delete/${idrequest}`;
     try {
       const response = await axios.delete(deleteUrl);
-      //console.log(response.data);
-      //console.log(idrequest);
     } catch (error) {
       throw error;
     }
@@ -185,7 +178,6 @@ export default function Ryhmät() {
           idGroup: idGroup,
         }
       );
-      // console.log("Jäsen lisätty");
     } catch (error) {
       throw error;
     }
@@ -239,8 +231,6 @@ export default function Ryhmät() {
       const response = await fetch(url);
 
       const data = await response.json();
-      //console.log("Response Data:", data);
-
       const iduser = data[0].iduser;
 
       return iduser;
@@ -271,7 +261,7 @@ export default function Ryhmät() {
             </ul>
           </div>
           <div className="kaksi">
-            <h4>Pyydä Liittyä Ryhmiin</h4>
+            <p>Pyydä Liittyä Ryhmiin</p>
             <table>
               <th>Ryhmän nimi</th>
               <th>Ryhmän kuvaus</th>
@@ -280,7 +270,7 @@ export default function Ryhmät() {
                   <td>{group.groupname}</td>
                   <td>{group.description}</td>
                   <button onClick={() => addRequest(group.idgroup, index)}>
-                    Lähetä liittymispyynntö
+                    Lähetä liittymispyyntö
                   </button>
                 </tr>
               ))}
@@ -347,6 +337,7 @@ export default function Ryhmät() {
       ) : (
         <div className="ryhmat-ei-kirjautunut">
           <p>Muiden ryhmät</p>
+          <p>Voit liittyä ryhmiin sisäänkirjautumisen jälkeen.</p>
           <table>
             <thead>
               <tr>

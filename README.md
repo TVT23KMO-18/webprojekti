@@ -41,7 +41,7 @@ Arvostelut-sivulle (kuva 5) käyttäjät voivat kirjoittaa elokuva- ja sarja-arv
 
 Haku-sivulla (kuva 6) käyttäjä voi hakea elokuvia eri suodatuksilla tai suoraan elokuvien tai sarjojen nimillä. Käyttäjä voi lisätä elokuvia ja sarjoja omalle suosikkilistalle, ryhmiin tai lisätä arvostelun arvostelusivulle. 
 
-![Kuva 6. Haku-sivu.](/documents/Final-UI/finalui_arvostelut.png)
+![Kuva 6. Haku-sivu.](/documents/Final-UI/finalui_haku.png)
 ***Kuva 6. Lopullinen Haku-sivu.***
 
 Näytökset sivulla (kuva 7) voi selata Finnkino-teattereiden näytösaikoja eri paikkakunnilta ja eri päiviltä. Käyttäjä voi linkittää näytösaikoja myös kuulumiinsa ryhmiin ryhmäsivulla. 

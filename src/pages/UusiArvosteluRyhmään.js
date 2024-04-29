@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
 import axios from "axios";
 import { useState } from "react";
-
 import { useNavigate, useParams } from "react-router-dom";
-
 import { UserContext } from "../context/UserContext";
+import "./UusiArvosteluRyhmään.css";
 
 export default function UusiArvosteluRyhmään() {
   const [groups, setGroups] = useState([]);
@@ -14,7 +13,6 @@ export default function UusiArvosteluRyhmään() {
   const { userid, token } = useContext(UserContext);
   const navigate = useNavigate();
   async function setGroupRewiev() {
-    //console.log(token);
 
     try {
       const response = await axios.post(
@@ -48,7 +46,6 @@ export default function UusiArvosteluRyhmään() {
         idgroup: group.idgroup,
         groupname: group.groupname,
       }));
-      console.log(groupData);
       setGroups(groupData);
     } catch (error) {
       console.error("Error fetching groups:", error);
@@ -80,9 +77,8 @@ export default function UusiArvosteluRyhmään() {
   }
   getGroups(userid);
   return (
-    <div>
+    <div className="uusiarvostelu-container">
       <div>
-        <p>{idreviews}</p>
         <label htmlFor="groupSelect">Select a group:</label>
         <select
           id="groupSelect"

@@ -3,7 +3,7 @@
   top: 55%;
   left: 50%;
   width: 50%;
-  height: 500px;
+  height: 550px;
   transform: translate(-50%, -50%);
   background: rgba(0, 0, 0, 0.9);
   box-shadow: 0 5px 15px rgba(0,0,0,.8);
@@ -28,8 +28,31 @@
   width: 50%;
   margin-bottom: 10px;
   font-size: larger;
+  margin-top: 10px;
 }
 
 p {
   margin-bottom: 30px;
+}
+
+.popupcontainer h3 {
+  background-color: var(--dark-color);
+  padding: 5px;
+}
+
+.popupcontainer label {
+  background-color: var(--dark-color);
+  padding: 8px;
+}
+
+.popupcontainer select {
+  height: 30px;
+  width: 200px;
+  background-color: var(--light-color);
+  color: var(--dark-color);
+}
+
+.popupcontainer select option {
+  background-color: var(--light-color);
+  color: var(--dark-color);
 }

@@ -84,18 +84,18 @@ export default function Etusivu() {
   return (
     <div className='etusivu'>
       <div className='etusivu-teksti'>
-        <h3>Tervetulo elokuva harrastelijoiden sivulle!</h3>
+        <h3>Tervetuloa elokuvaharrastelijoiden sivulle!</h3>
         <br></br>
         <p>
-          Täällä sinä voit etsiä elokuvia ja sarjoja. Katsoa mitä elokuvia pyörii elokuvateattereissa. 
+          Täällä voit etsiä elokuvia ja sarjoja. Katsoa mitä elokuvia pyörii elokuvateattereissa. 
           Voit lukea myös muiden ihmisten arvosteluja elokuvista ja sarjoista.
           Kirjautuneena voit lisätä elokuvia ja sarjoja omaan suosikkilistaan. Pystyt luomaan ryhmiä ja hallitsemaan niitä.
-          Ryhmän luojana sinä voit lähetää liittymispyyntöjä ja hyväksymään niitä. Voit halutessasi poistaa myös ryhmän jäseniä. 
-          Kirjautuneena sinä voit lähettää erilaisiin ryhmiin liittymispyyntöjä, jotka ovat kiinnostuneet samalaisista elokuvista kuin sinä.
+          Ryhmän luojana voit lähettää liittymispyyntöjä ja hyväksymään niitä. Voit halutessasi poistaa myös ryhmän jäseniä. 
+          Kirjautuneena sinä voit lähettää erilaisiin ryhmiin liittymispyyntöjä, jotka ovat kiinnostuneet samanlaisista elokuvista kuin sinä.
           Ryhmän jäsenenä voit lisätä ryhmään elokuvia, sarjoja ja näytösaikoja ryhmän sivulle.
         </p>
         <p>
-          Ensimmäisenä aloita luomaan käyttäjä itsellesi, jonka jälkeen pääset kirjautumaan sivustolle ja sen jälkeen olet valmis tekemään siitä itsesi näköisen.
+          Ensimmäisenä aloita luomalla käyttäjätunnus itsellesi, jonka jälkeen pääset kirjautumaan sivustolle, sitten olet valmis tekemään siitä itsesi näköisen.
 
         </p>
       </div>

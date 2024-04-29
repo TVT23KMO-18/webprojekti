@@ -437,9 +437,9 @@ export default function RyhmänOmaSivu() {
 
   return (
     <div className="ryhmäbody">
-      <h1>{groupname}</h1>
+      <h1>Ryhmä: {groupname}</h1>
       <div className="Ryhmänomansivuncontainer">
-        <h3>Elokuvat ja Sarjat</h3>
+        <h3>Elokuvat ja sarjat</h3>
         <div className="ryhmällejaetutelokuvat">
           {elokuvatSarjat.map((sisältö, index) => (
             <div key={index} className="elokuvatdata">

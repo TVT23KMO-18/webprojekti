@@ -14,14 +14,12 @@ export default function UusiArvostelu() {
 
   const handleChange = (e) => {
     setRating(e.target.value);
-    // console.log(e.target.value);
   };
 
   const textChange = (e) => {
     setText(e.target.value);
   };
   async function setReview() {
-    //console.log(token);
 
     let serieid = "";
     let id = "";
